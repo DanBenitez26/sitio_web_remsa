@@ -1,0 +1,385 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/catalogo.css' %}?v=16">
+{% endblock %}
+{% block content %}
+
+<section class="catalogo-hero">
+  <div class="catalogo-hero-panel">
+    <h1>Categorías de productos</h1>
+    <nav aria-label="breadcrumb" class="catalogo-hero-crumb">
+      <a href="{% url 'paginas:home' %}">Inicio</a> <span aria-hidden="true">›</span>
+      <strong aria-current="page">Categorías de productos</strong>
+    </nav>
+  </div>
+  <div class="catalogo-hero-visual">
+    <img src="{% static 'img/img-remsa/img_categoria_pruductos.png' %}" alt="Categorías de productos REMSA">
+  </div>
+</section>
+
+<section class="catalogo-intro">
+  <div class="container">
+    <p>Fabricamos envases y empaques plásticos para la industria de bebidas, alimentos y productos de consumo. Conoce nuestras líneas y consulta el <strong>catálogo digital</strong> de REMSA.</p>
+  </div>
+</section>
+
+<section class="catalogo-page section-padding">
+  <div class="container">
+    {% if not show_products %}
+    <div class="categoria-grid" aria-label="Categorías de productos">
+      {% for category_slug, category_name, category_images, display_name, product_count, category_description in categorias %}
+      <article class="categoria-card">
+        <div class="categoria-card-media">
+          <img src="{% static category_images.0 %}" alt="{{ display_name }}" loading="lazy">
+          <span class="categoria-card-icon" aria-hidden="true"><i class="bi {% if category_slug == 'garrafones' %}bi-droplet-fill{% elif category_slug == 'botellas' %}bi-cup-straw{% elif category_slug == 'asas' %}bi-bag-fill{% elif category_slug == 'tapas' %}bi-record-circle{% elif category_slug == 'preformas' %}bi-capsule{% elif category_slug == 'frascos' %}bi-box-seam{% else %}bi-basket2-fill{% endif %}"></i></span>
+        </div>
+        <div class="categoria-card-body">
+          <h2>{{ display_name }}</h2>
+          <p>{{ category_description }}</p>
+          <button type="button" class="btn categoria-card-btn" data-category-detail
+            data-category-slug="{{ category_slug }}"
+            data-category-title="{{ display_name }}"
+            data-category-image="{% static category_images.0 %}"
+            data-category-description="{{ category_description }}"
+            data-category-features="{{ product_count }} producto{{ product_count|pluralize }} disponibles|Línea de {{ display_name|lower }} dentro del catálogo REMSA|Soluciones de envase y empaque para industria y consumo"
+            data-bs-toggle="modal" data-bs-target="#modalDetalleCategoria"
+            aria-label="Ver detalles de {{ display_name }}">
+            Ver detalles<i class="bi bi-chevron-right ms-2 small" aria-hidden="true"></i>
+          </button>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if mostrar_solicitud_catalogo and not categoria_actual and not query and not tipo_actual and not color_actual and not medida_actual %}
+    <div class="catalogo-general-cta">
+      <span><strong>¿Buscas el catálogo completo?</strong> Déjanos tus datos y ventas te lo comparte.</span>
+      <button type="button" class="btn btn-navy" data-catalog-request
+        data-product-name="Catálogo completo REMSA">
+        Solicitar catálogo <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+      </button>
+    </div>
+    {% endif %}
+
+    {% if show_products %}
+    <section class="catalogo-listado" aria-labelledby="tituloProductosCatalogo">
+      <div class="catalogo-listado-heading">
+        <div>
+          <span class="section-title-eyebrow">
+            {% if categoria_actual %}{{ categoria_actual|title }}{% else %}Todas las líneas{% endif %}
+          </span>
+          <h2 id="tituloProductosCatalogo">Productos</h2>
+        </div>
+        <span class="catalogo-total">
+          <strong>{{ page_obj.paginator.count }}</strong>
+          producto{{ page_obj.paginator.count|pluralize }}
+        </span>
+      </div>
+
+      <form id="filtrosCatalogo" class="catalogo-filtros" method="get" role="search">
+        {% if categoria_actual %}<input type="hidden" name="categoria" value="{{ categoria_actual }}">{% endif %}
+        <label class="catalogo-busqueda">
+          <span class="visually-hidden">Buscar productos</span>
+          <i class="bi bi-search" aria-hidden="true"></i>
+          <input id="busquedaCatalogo" type="search" name="q" value="{{ query }}"
+            placeholder="Buscar en el catálogo..." autocomplete="off">
+        </label>
+        <label>
+          <span class="visually-hidden">Filtrar por tipo</span>
+          <select id="filtroTipo" name="tipo" class="form-select">
+            <option value="">Todos los tipos</option>
+            {% for value, label in tipos %}
+            <option value="{{ value }}" {% if value == tipo_actual %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+          </select>
+        </label>
+        <label>
+          <span class="visually-hidden">Filtrar por color</span>
+          <select id="filtroColor" name="color" class="form-select">
+            <option value="">Todos los colores</option>
+            {% for value in colores %}
+            <option value="{{ value }}" {% if value == color_actual %}selected{% endif %}>{{ value }}</option>
+            {% endfor %}
+          </select>
+        </label>
+        <label>
+          <span class="visually-hidden">Filtrar por capacidad o medida</span>
+          <select id="filtroMedida" name="medida" class="form-select">
+            <option value="">Todas las medidas</option>
+            {% for value in medidas %}
+            <option value="{{ value }}" {% if value == medida_actual %}selected{% endif %}>{{ value }}</option>
+            {% endfor %}
+          </select>
+        </label>
+        <button class="btn btn-outline-secondary catalogo-limpiar" type="reset">
+          <i class="bi bi-arrow-counterclockwise me-1" aria-hidden="true"></i>Limpiar
+        </button>
+      </form>
+
+      <div class="row g-3 catalogo-grid" id="catalogoProductos">
+        {% for producto in productos %}
+        <article class="col-12 col-sm-6 col-xl-4 col-xxl-3 catalogo-item" data-catalog-product>
+          <div class="card card-producto catalogo-card">
+            <div class="catalogo-imagen">
+              {% with imagen=producto.imagen_catalogo %}
+              {% if imagen %}
+              <img src="{{ imagen.url }}" alt="{{ producto.nombre }}" loading="lazy">
+              {% else %}
+              <div class="catalogo-sin-imagen" role="img" aria-label="Imagen no disponible">
+                <i class="bi bi-box-seam" aria-hidden="true"></i>
+                <span>Imagen no disponible</span>
+              </div>
+              {% endif %}
+              {% endwith %}
+            </div>
+            <div class="card-body catalogo-card-body">
+              <h3 class="card-title">{{ producto.nombre }}</h3>
+              {% if producto.descripcion_corta %}
+              <p class="catalogo-descripcion">{{ producto.descripcion_corta }}</p>
+              {% endif %}
+              <div class="catalogo-acciones">
+                <button type="button" class="btn btn-outline-primary"
+                  data-bs-toggle="modal" data-bs-target="#modalDetalleProducto"
+                  data-product-detail="detalleProducto-{{ producto.pk }}"
+                  data-product-name="{{ producto.nombre }}"
+                  data-product-pdf="{% url 'catalogo:ficha_pdf' producto.slug %}"
+                  data-product-quote="{% url 'cotizaciones:agregar' producto.pk %}">
+                  Ver detalles
+                </button>
+                {% if mostrar_ficha_pdf %}
+                <a class="btn btn-light catalogo-pdf-button" href="{% url 'catalogo:ficha_pdf' producto.slug %}">
+                  <i class="bi bi-file-earmark-pdf me-1" aria-hidden="true"></i>Ficha PDF
+                </a>
+                {% endif %}
+                {% if mostrar_solicitud_catalogo %}
+                <button type="button" class="btn btn-navy" data-catalog-request
+                  data-product-name="{{ producto.nombre }}">
+                  <i class="bi bi-send me-1" aria-hidden="true"></i>Solicitar catálogo
+                </button>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <template id="detalleProducto-{{ producto.pk }}">
+            {% with detail_description=producto.descripcion|default:producto.descripcion_corta %}
+            {% if detail_description %}
+            <div class="catalogo-modal-descripcion">
+              <h3>Descripción</h3>
+              <p>{{ detail_description }}</p>
+            </div>
+            {% endif %}
+            {% endwith %}
+            <dl class="catalogo-modal-datos">
+              {% if producto.material %}
+              <div><dt>Material</dt><dd>{{ producto.get_material_display }}</dd></div>
+              {% endif %}
+              {% if producto.capacidad %}
+              <div><dt>Capacidad / medida</dt><dd>{{ producto.capacidad }}</dd></div>
+              {% endif %}
+              {% if producto.color %}
+              <div><dt>Color</dt><dd>{{ producto.color }}</dd></div>
+              {% endif %}
+              {% if producto.tipo %}
+              <div><dt>Tipo</dt><dd>{{ producto.catalogo_tipo }}</dd></div>
+              {% endif %}
+              {% for especificacion in producto.especificaciones.all %}
+              <div><dt>{{ especificacion.nombre }}</dt><dd>{{ especificacion.valor }}</dd></div>
+              {% endfor %}
+            </dl>
+          </template>
+        </article>
+        {% empty %}
+        <div class="col-12">
+          <div class="catalogo-vacio">
+            <i class="bi bi-search" aria-hidden="true"></i>
+            <p>No encontramos productos con esos filtros.</p>
+            {% if categoria_actual == 'frascos' and mostrar_solicitud_catalogo %}
+            <p>Consulta con nuestro equipo comercial por la línea de frascos.</p>
+            <button type="button" class="btn btn-navy" data-catalog-request data-product-name="Frascos PET">
+              Solicitar catálogo
+            </button>
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      {% if page_obj.paginator.num_pages > 1 %}
+      <nav class="catalogo-paginacion" aria-label="Paginación de productos">
+        {% if page_obj.has_previous %}
+        <a class="btn btn-outline-secondary" href="?{% if categoria_actual %}categoria={{ categoria_actual }}&amp;{% endif %}{% if query %}q={{ query|urlencode }}&amp;{% endif %}{% if tipo_actual %}tipo={{ tipo_actual|urlencode }}&amp;{% endif %}{% if color_actual %}color={{ color_actual|urlencode }}&amp;{% endif %}{% if medida_actual %}medida={{ medida_actual|urlencode }}&amp;{% endif %}page={{ page_obj.previous_page_number }}">
+          <i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Anterior
+        </a>
+        {% else %}<span></span>{% endif %}
+        <span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+        {% if page_obj.has_next %}
+        <a class="btn btn-outline-secondary" href="?{% if categoria_actual %}categoria={{ categoria_actual }}&amp;{% endif %}{% if query %}q={{ query|urlencode }}&amp;{% endif %}{% if tipo_actual %}tipo={{ tipo_actual|urlencode }}&amp;{% endif %}{% if color_actual %}color={{ color_actual|urlencode }}&amp;{% endif %}{% if medida_actual %}medida={{ medida_actual|urlencode }}&amp;{% endif %}page={{ page_obj.next_page_number }}">
+          Siguiente<i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+        </a>
+        {% else %}<span></span>{% endif %}
+      </nav>
+      {% endif %}
+    </section>
+    {% endif %}
+  </div>
+</section>
+
+<div class="modal fade" id="modalDetalleProducto" tabindex="-1"
+  aria-labelledby="modalDetalleProductoTitulo" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content catalogo-modal">
+      <div class="modal-header">
+        <h2 class="modal-title h4" id="modalDetalleProductoTitulo"></h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <div id="modalDetalleProductoContenido"></div>
+      </div>
+      <div class="modal-footer">
+        {% if mostrar_ficha_pdf %}
+        <a id="modalFichaPdf" class="btn btn-outline-primary" href="#">
+          <i class="bi bi-file-earmark-pdf me-1" aria-hidden="true"></i>Descargar ficha PDF
+        </a>
+        {% endif %}
+        <button class="btn btn-navy" type="button" data-open-chat-modal data-bs-dismiss="modal">Cotizar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalDetalleCategoria" tabindex="-1" aria-labelledby="modalDetalleCategoriaTitulo" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+    <div class="modal-content catalogo-modal">
+      <div class="modal-header">
+        <h2 class="modal-title h4" id="modalDetalleCategoriaTitulo">Categoría</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <div class="catalogo-modal-product-image">
+          <img id="modalDetalleCategoriaImagen" src="" alt="">
+        </div>
+        <div class="catalogo-modal-descripcion">
+          <h3>Ficha del producto</h3>
+          <label class="visually-hidden" for="modalDetalleCategoriaProducto">Producto</label>
+          <select id="modalDetalleCategoriaProducto" class="form-select catalogo-ficha-select" hidden></select>
+          <div id="modalDetalleCategoriaFicha" class="catalogo-ficha" aria-live="polite"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a id="modalDetalleCategoriaCatalogo" class="btn btn-navy" href="{{ catalogo_digital_url }}" target="_blank" rel="noopener noreferrer">
+          <i class="bi bi-download me-1" aria-hidden="true"></i>Descargar catálogo
+        </a>
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade catalogo-solicitud-modal" id="modalSolicitudCatalogo" tabindex="-1" hidden
+  aria-labelledby="modalSolicitudCatalogoTitulo" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="catalogo-solicitud-aside">
+        <button type="button" class="btn-close btn-close-white catalogo-solicitud-close-mobile"
+          data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        <img src="{% static 'img/logo/logo_remsa.png' %}" alt="REMSA Plásticos">
+        <span class="catalogo-solicitud-eyebrow">Atención comercial</span>
+        <h2>Soluciones de empaque para tu empresa</h2>
+        <p>Déjanos tus datos y nuestro equipo comercial se pondrá en contacto contigo para compartirte nuestro catálogo de productos.</p>
+        <div class="catalogo-solicitud-interes">
+          <i class="bi bi-box-seam" aria-hidden="true"></i>
+          <span><small>Producto de interés</small><strong id="catalogoProductoSeleccionado">Catálogo completo REMSA</strong></span>
+        </div>
+      </div>
+      <div class="catalogo-solicitud-form-panel">
+        <div class="catalogo-solicitud-heading">
+          <div>
+            <span class="section-title-eyebrow">REMSA Plásticos</span>
+            <h2 id="modalSolicitudCatalogoTitulo">Solicita nuestro catálogo</h2>
+          </div>
+          <button type="button" class="btn-close catalogo-solicitud-close-desktop"
+            data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <p class="catalogo-solicitud-intro">Completa tus datos y te contactaremos para compartirte la información.</p>
+
+        <div id="catalogoSolicitudError" class="alert alert-danger d-none" role="alert"></div>
+        <form id="solicitarCatalogoForm" method="post" action="{% url 'contacto:solicitar_catalogo' %}"
+          data-recaptcha-enabled="{{ recaptcha_enabled|yesno:'true,false' }}">
+          {% csrf_token %}
+          <input type="hidden" name="producto" id="solicitudProducto" value="Catálogo completo REMSA">
+          <input type="hidden" name="pagina" id="solicitudPagina" value="">
+          <div class="catalogo-honeypot" aria-hidden="true">
+            <label for="solicitudSitioWeb">Deja este campo vacío</label>
+            <input id="solicitudSitioWeb" type="text" name="sitio_web" tabindex="-1" autocomplete="off">
+          </div>
+          <div class="catalogo-form-grid">
+            <div>
+              <label class="form-label" for="solicitudNombre">Nombre</label>
+              <input class="form-control" id="solicitudNombre" name="nombre" type="text"
+                placeholder="Ingresa tu nombre" maxlength="150" autocomplete="name" required>
+            </div>
+            <div>
+              <label class="form-label" for="solicitudEmpresa">Empresa</label>
+              <input class="form-control" id="solicitudEmpresa" name="empresa" type="text"
+                placeholder="Nombre de tu empresa" maxlength="150" autocomplete="organization" required>
+            </div>
+            <div>
+              <label class="form-label" for="solicitudCorreo">Correo electrónico</label>
+              <input class="form-control" id="solicitudCorreo" name="correo" type="email"
+                placeholder="correo@empresa.com" maxlength="254" autocomplete="email" required>
+            </div>
+            <div>
+              <label class="form-label" for="solicitudTelefono">Teléfono</label>
+              <input class="form-control" id="solicitudTelefono" name="telefono" type="tel"
+                placeholder="999 999 9999" maxlength="30" autocomplete="tel" required>
+            </div>
+            <div class="catalogo-form-full">
+              <label class="form-label" for="solicitudProductoVisible">Producto de interés</label>
+              <input class="form-control" id="solicitudProductoVisible" type="text"
+                value="Catálogo completo REMSA" maxlength="150" required>
+            </div>
+            <div class="catalogo-form-full">
+              <label class="form-label" for="solicitudMensaje">Mensaje <span>(opcional)</span></label>
+              <textarea class="form-control" id="solicitudMensaje" name="mensaje" rows="3" maxlength="2000"
+                placeholder="Cuéntanos qué estás buscando..."></textarea>
+            </div>
+          </div>
+
+          {% if recaptcha_enabled %}
+          <div class="catalogo-recaptcha">
+            <div class="g-recaptcha" data-sitekey="{{ recaptcha_site_key }}"></div>
+          </div>
+          {% elif recaptcha_config_incomplete %}
+          <p class="small text-danger">La configuración de CAPTCHA está incompleta. Contacta al administrador del sitio.</p>
+          {% endif %}
+
+          <div class="form-check catalogo-privacidad">
+            <input class="form-check-input" id="solicitudPrivacidad" name="acepta_privacidad"
+              type="checkbox" value="true" required>
+            <label class="form-check-label" for="solicitudPrivacidad">
+              Acepto el <a href="{% url 'paginas:privacidad' %}" target="_blank" rel="noopener">aviso de privacidad</a>
+              y autorizo el uso de mis datos para recibir información comercial.
+            </label>
+          </div>
+          <button class="btn btn-navy catalogo-solicitud-submit" id="catalogoSolicitudEnviar" type="submit">
+            <span>Solicitar catálogo</span><i class="bi bi-arrow-right" aria-hidden="true"></i>
+          </button>
+        </form>
+
+        <div id="catalogoSolicitudExito" class="catalogo-solicitud-success d-none" role="status" tabindex="-1">
+          <span class="catalogo-success-icon"><i class="bi bi-check-lg" aria-hidden="true"></i></span>
+          <h3>¡Solicitud enviada!</h3>
+          <p>Gracias por tu interés en REMSA. Hemos recibido tus datos y nuestro equipo comercial se pondrá en contacto contigo.</p>
+          <button type="button" class="btn btn-navy" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% if recaptcha_enabled %}
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+{% endif %}
+{% endblock %}
+{% block extra_js %}<script src="{% static 'js/catalogo.js' %}?v=11"></script>{% endblock %}

@@ -1,0 +1,237 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="breadcrumb-remsa">
+  <div class="container">
+    <nav aria-label="breadcrumb"><ol class="breadcrumb mb-0">
+      <li class="breadcrumb-item"><a href="{% url 'paginas:home' %}">Inicio</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'catalogo:servicios' %}">Soluciones</a></li>
+      <li class="breadcrumb-item active">{{ servicio.nombre }}</li>
+    </ol></nav>
+  </div>
+</div>
+{% if servicio.slug == 'pigmentado-de-envases' %}
+<section class="section-padding pigmentado-detail">
+  <div class="container">
+    <div class="pigmentado-intro text-center">
+      <div class="section-title-eyebrow">Color para tu marca</div>
+      <h1 class="h2">{{ servicio.nombre }}</h1>
+      <p>{{ servicio.descripcion_corta|default:"Personalizamos el color de tus envases para dar vida a la presentación de tu producto." }}</p>
+      <span class="pigmentado-note"><i class="bi bi-palette2" aria-hidden="true"></i> Colores de referencia; sujetos a factibilidad y disponibilidad.</span>
+    </div>
+    <div class="pigmentado-formatos">
+      <figure class="pigmentado-formatos-imagen">
+        <img src="{% static 'img/img-remsa/img-soluciones/img_envases_varios.png' %}" alt="Garrafones y botellas PET y PEAD en distintos colores de referencia" loading="lazy">
+        <figcaption>Opciones de color para garrafones y botellas</figcaption>
+      </figure>
+      <article class="pigmentado-formatos-tapas">
+        <img src="{% static 'img/img-remsa/img-home-productos/img-tapas.png' %}" alt="Tapas de plástico en azul, verde y blanco" loading="lazy">
+        <div>
+          <span class="pigmentado-formatos-etiqueta"><i class="bi bi-box-seam" aria-hidden="true"></i> También complementos</span>
+          <h2 class="h5">Tapas para completar tu presentación</h2>
+          <p>Consulta opciones de color para tapas; la disponibilidad se confirma según cada proyecto.</p>
+        </div>
+      </article>
+    </div>
+    <div class="row g-3 g-lg-4 justify-content-center pigmentado-gallery">
+      <div class="col-12 col-sm-6 col-md-4">
+        <figure class="pigmentado-swatch-card">
+          <div class="pigmentado-swatch-image">
+            <img src="{% static 'img/img-remsa/envase-garrafon-transparente.png' %}" alt="Garrafón transparente" loading="lazy">
+            <figcaption class="pigmentado-swatch-overlay">
+              <span class="pigmentado-color-dot" style="--pigmento-color:#dfe8f3"></span>
+              <span><strong>Transparente</strong><small>Una presentación natural</small></span>
+            </figcaption>
+          </div>
+        </figure>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4">
+        <figure class="pigmentado-swatch-card">
+          <div class="pigmentado-swatch-image">
+            <img src="{% static 'img/img-remsa/envase-garrafon-transparente.png' %}" alt="Garrafón azul genérico" style="filter: saturate(0.9) brightness(1)" loading="lazy">
+            <figcaption class="pigmentado-swatch-overlay">
+              <span class="pigmentado-color-dot" style="--pigmento-color:#6b8db8"></span>
+              <span><strong>Azul genérico</strong><small>Una opción clásica y versátil</small></span>
+            </figcaption>
+          </div>
+        </figure>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4">
+        <figure class="pigmentado-swatch-card">
+          <div class="pigmentado-swatch-image">
+            <img src="{% static 'img/img-remsa/envase-garrafon-transparente.png' %}" alt="Garrafón azul cobalto" style="filter: hue-rotate(8deg) saturate(2.2) brightness(0.75)" loading="lazy">
+            <figcaption class="pigmentado-swatch-overlay">
+              <span class="pigmentado-color-dot" style="--pigmento-color:#234d9b"></span>
+              <span><strong>Azul cobalto</strong><small>Un tono intenso y profundo</small></span>
+            </figcaption>
+          </div>
+        </figure>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4">
+        <figure class="pigmentado-swatch-card">
+          <div class="pigmentado-swatch-image">
+            <img src="{% static 'img/img-remsa/envase-garrafon-transparente.png' %}" alt="Garrafón morado" style="filter: hue-rotate(60deg) saturate(1.8) brightness(0.95)" loading="lazy">
+            <figcaption class="pigmentado-swatch-overlay">
+              <span class="pigmentado-color-dot" style="--pigmento-color:#7a4fd8"></span>
+              <span><strong>Morado</strong><small>Un color distintivo para tu marca</small></span>
+            </figcaption>
+          </div>
+        </figure>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4">
+        <figure class="pigmentado-swatch-card">
+          <div class="pigmentado-swatch-image">
+            <img src="{% static 'img/img-remsa/envase-garrafon-transparente.png' %}" alt="Garrafón verde acqua" style="filter: hue-rotate(-40deg) saturate(1.8) brightness(1.05)" loading="lazy">
+            <figcaption class="pigmentado-swatch-overlay">
+              <span class="pigmentado-color-dot" style="--pigmento-color:#4bb8a9"></span>
+              <span><strong>Verde acqua</strong><small>Un tono fresco y moderno</small></span>
+            </figcaption>
+          </div>
+        </figure>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4">
+        <figure class="pigmentado-swatch-card">
+          <div class="pigmentado-swatch-image">
+            <img src="{% static 'img/img-remsa/envase-garrafon-transparente.png' %}" alt="Garrafón rosa" style="filter: hue-rotate(130deg) saturate(1.6) brightness(1.15)" loading="lazy">
+            <figcaption class="pigmentado-swatch-overlay">
+              <span class="pigmentado-color-dot" style="--pigmento-color:#f08cb8"></span>
+              <span><strong>Rosa</strong><small>Un tono suave y llamativo</small></span>
+            </figcaption>
+          </div>
+        </figure>
+      </div>
+    </div>
+    <div class="pigmentado-disponibles text-center">
+      <p class="option-label">Colores disponibles en garrafón</p>
+      <div class="color-swatch-group justify-content-center" aria-label="Colores disponibles en garrafón">
+        <span class="color-swatch" style="--swatch-color: #dfe8f3;" title="Transparente" aria-label="Transparente"></span>
+        <span class="color-swatch" style="--swatch-color: #6b8db8;" title="Azul genérico" aria-label="Azul genérico"></span>
+        <span class="color-swatch" style="--swatch-color: #234d9b;" title="Azul cobalto" aria-label="Azul cobalto"></span>
+        <span class="color-swatch" style="--swatch-color: #7a4fd8;" title="Morado" aria-label="Morado"></span>
+        <span class="color-swatch" style="--swatch-color: #4bb8a9;" title="Verde acqua" aria-label="Verde acqua"></span>
+        <span class="color-swatch" style="--swatch-color: #f08cb8;" title="Rosa" aria-label="Rosa"></span>
+      </div>
+      <p class="option-label mt-4">Colores disponibles en botella</p>
+      <div class="color-swatch-group justify-content-center" aria-label="Colores disponibles en botella">
+        <span class="color-swatch" style="--swatch-color: #dfe8f3;" title="Transparente" aria-label="Transparente"></span>
+        <span class="color-swatch" style="--swatch-color: #6b8db8;" title="Azul genérico" aria-label="Azul genérico"></span>
+        <span class="color-swatch" style="--swatch-color: #234d9b;" title="Azul cobalto" aria-label="Azul cobalto"></span>
+      </div>
+      <p class="option-label mt-4">Colores disponibles en tapa</p>
+      <div class="color-swatch-group justify-content-center" aria-label="Colores disponibles en tapa">
+        <span class="color-swatch" style="--swatch-color: #2f80ed;" title="Azul" aria-label="Azul"></span>
+        <span class="color-swatch" style="--swatch-color: #14284b;" title="Azul marino" aria-label="Azul marino"></span>
+        <span class="color-swatch" style="--swatch-color: #1f3fbf;" title="Azul rey" aria-label="Azul rey"></span>
+        <span class="color-swatch" style="--swatch-color: #f28c28;" title="Naranja" aria-label="Naranja"></span>
+        <span class="color-swatch" style="--swatch-color: #ffffff;" title="Blanco" aria-label="Blanco"></span>
+        <span class="color-swatch" style="--swatch-color: #2e9e4f;" title="Verde" aria-label="Verde"></span>
+        <span class="color-swatch" style="--swatch-color: #d62828;" title="Rojo" aria-label="Rojo"></span>
+        <span class="color-swatch" style="--swatch-color: #f7c600;" title="Amarillo" aria-label="Amarillo"></span>
+        <span class="color-swatch" style="--swatch-color: #1a1a1a;" title="Negro" aria-label="Negro"></span>
+      </div>
+    </div>
+    <div class="pigmentado-footer">
+      <p>¿Buscas otro tono o quieres pigmentado para botellas PET? La disponibilidad se revisa para cada proyecto.</p>
+      <a href="#" data-open-chat-modal aria-controls="chatbotPanel" class="btn btn-navy">Consultar opciones <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+    </div>
+  </div>
+</section>
+{% else %}
+<section class="section-padding">
+  <div class="container">
+    <div class="row g-5 align-items-start">
+      <div class="col-lg-6">
+        <div class="product-image-panel">
+          <img id="product-main-image" src="{% static 'img/img-remsa/envase-garrafon-transparente.png' %}" alt="Garrafón transparente" class="product-main-image">
+          <div class="product-image-caption" id="product-image-caption" aria-live="polite">{% if servicio.slug == 'personalizacion-de-garrafones' %}Garrafón transparente{% else %}[ Imagen de {{ servicio.nombre }} ]{% endif %}</div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="icono-servicio mb-3">
+          {% if servicio.slug == 'personalizacion-de-garrafones' %}
+          <i class="bi bi-box-seam" aria-hidden="true"></i>
+          {% elif servicio.slug == 'pigmentado-de-envases' %}
+          <i class="bi bi-palette-fill" aria-hidden="true"></i>
+          {% elif servicio.slug == 'proteccion-uv' %}
+          <i class="bi bi-sun-fill" aria-hidden="true"></i>
+          {% else %}
+          <i class="bi {{ servicio.icono|default:'bi-gear' }}" aria-hidden="true"></i>
+          {% endif %}
+        </div>
+        <h1 class="h3">{{ servicio.nombre }}</h1>
+        <p class="text-muted">{{ servicio.descripcion_corta }}</p>
+        <p>{{ servicio.descripcion|linebreaksbr }}</p>
+
+        <div class="product-options">
+          <p class="option-label">Elige un color</p>
+          <div class="color-swatch-group" aria-label="Selector de colores del producto">
+            <button type="button" class="color-swatch product-variant" data-image="{% static 'img/img-remsa/envase-garrafon-transparente.png' %}" data-filter="drop-shadow(0 20px 32px rgba(15, 52, 83, 0.12)) saturate(0.9) brightness(1)" data-label="Garrafón azul genérico" style="--swatch-color: #6b8db8;" aria-label="Azul genérico"></button>
+            <button type="button" class="color-swatch product-variant" data-image="{% static 'img/img-remsa/envase-garrafon-transparente.png' %}" data-filter="drop-shadow(0 20px 32px rgba(15, 52, 83, 0.12)) hue-rotate(8deg) saturate(2.2) brightness(0.75)" data-label="Garrafón azul cobalto" style="--swatch-color: #234d9b;" aria-label="Azul cobalto"></button>
+            <button type="button" class="color-swatch product-variant" data-image="{% static 'img/img-remsa/envase-garrafon-transparente.png' %}" data-filter="drop-shadow(0 20px 32px rgba(15, 52, 83, 0.12)) hue-rotate(60deg) saturate(1.8) brightness(0.95)" data-label="Garrafón morado" style="--swatch-color: #7a4fd8;" aria-label="Morado"></button>
+            <button type="button" class="color-swatch product-variant" data-image="{% static 'img/img-remsa/envase-garrafon-transparente.png' %}" data-filter="drop-shadow(0 20px 32px rgba(15, 52, 83, 0.12)) hue-rotate(-40deg) saturate(1.8) brightness(1.05)" data-label="Garrafón verde acqua" style="--swatch-color: #4bb8a9;" aria-label="Verde acqua"></button>
+            <button type="button" class="color-swatch product-variant" data-image="{% static 'img/img-remsa/envase-garrafon-transparente.png' %}" data-filter="drop-shadow(0 20px 32px rgba(15, 52, 83, 0.12)) hue-rotate(130deg) saturate(1.6) brightness(1.15)" data-label="Garrafón rosa" style="--swatch-color: #f08cb8;" aria-label="Rosa"></button>
+            <button type="button" class="color-swatch product-variant is-active" data-image="{% static 'img/img-remsa/envase-garrafon-transparente.png' %}" data-label="Garrafón transparente" style="--swatch-color: #dfe8f3;" aria-label="Transparente"></button>
+          </div>
+        </div>
+
+        <div class="product-category-block">
+          <p class="option-label">Botellas</p>
+          <button type="button" class="product-variant product-variant-card" data-image="{% static 'img/img-remsa/Botella Pet.png' %}" data-label="Botella PET transparente" aria-label="Seleccionar botella PET transparente">
+            <span class="product-variant-image"><img src="{% static 'img/img-remsa/Botella Pet.png' %}" alt="Botella PET transparente"></span>
+            <span class="product-variant-info"><strong>Botella PET</strong><small>Transparente</small></span>
+            <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
+          </button>
+          <div class="product-options bottle-color-options">
+            <p class="option-label">Elige un color para tu botella</p>
+            <div class="color-swatch-group" aria-label="Selector de colores de la botella">
+              <button type="button" class="color-swatch product-variant is-active" data-image="{% static 'img/img-remsa/Botella Pet.png' %}" data-filter="drop-shadow(0 20px 32px rgba(15, 52, 83, 0.12)) saturate(0.2)" data-label="Botella PET transparente" style="--swatch-color: #dfe8f3;" aria-label="Botella transparente"></button>
+              <button type="button" class="color-swatch product-variant" data-image="{% static 'img/img-remsa/Botella Pet.png' %}" data-filter="drop-shadow(0 20px 32px rgba(15, 52, 83, 0.12)) sepia(0.2) saturate(2) hue-rotate(165deg)" data-label="Botella PET azul genérico" style="--swatch-color: #6b8db8;" aria-label="Botella azul genérico"></button>
+              <button type="button" class="color-swatch product-variant" data-image="{% static 'img/img-remsa/Botella Pet.png' %}" data-filter="drop-shadow(0 20px 32px rgba(15, 52, 83, 0.12)) sepia(0.3) saturate(3) hue-rotate(180deg)" data-label="Botella PET azul cobalto" style="--swatch-color: #234d9b;" aria-label="Botella azul cobalto"></button>
+            </div>
+          </div>
+        </div>
+        {% if servicio.slug == 'personalizacion-de-garrafones' %}
+        <div class="product-category-block">
+          <p class="option-label">Tapas</p>
+          <button type="button" class="product-variant product-variant-card" data-image="{% static 'img/img-remsa/img-home-productos/img-tapas.png' %}" data-label="Tapas de distintos colores" aria-label="Mostrar tapas de distintos colores">
+            <span class="product-variant-image"><img src="{% static 'img/img-remsa/img-home-productos/img-tapas.png' %}" alt="Tapas de plástico en distintos colores"></span>
+            <span class="product-variant-info"><strong>Tapas de PP</strong><small>Opciones de color sujetas a disponibilidad</small></span>
+            <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
+          </button>
+          <div class="product-options bottle-color-options">
+            <p class="option-label">Elige un color para tu tapa</p>
+            <div class="color-swatch-group" aria-label="Selector de colores de la tapa">
+              <button type="button" class="color-swatch product-variant" data-image="{% static 'img/img-remsa/img-home-productos/img-tapas.png' %}" data-label="Tapa azul" style="--swatch-color: #2f80ed;" aria-label="Tapa azul"></button>
+              <button type="button" class="color-swatch product-variant" data-image="{% static 'img/img-remsa/img-home-productos/img-tapas.png' %}" data-label="Tapa azul marino" style="--swatch-color: #14284b;" aria-label="Tapa azul marino"></button>
+              <button type="button" class="color-swatch product-variant" data-image="{% static 'img/img-remsa/img-home-productos/img-tapas.png' %}" data-label="Tapa azul rey" style="--swatch-color: #1f3fbf;" aria-label="Tapa azul rey"></button>
+              <button type="button" class="color-swatch product-variant" data-image="{% static 'img/img-remsa/img-home-productos/img-tapas.png' %}" data-label="Tapa naranja" style="--swatch-color: #f28c28;" aria-label="Tapa naranja"></button>
+              <button type="button" class="color-swatch product-variant" data-image="{% static 'img/img-remsa/img-home-productos/img-tapas.png' %}" data-label="Tapa blanca" style="--swatch-color: #ffffff;" aria-label="Tapa blanca"></button>
+              <button type="button" class="color-swatch product-variant" data-image="{% static 'img/img-remsa/img-home-productos/img-tapas.png' %}" data-label="Tapa verde" style="--swatch-color: #2e9e4f;" aria-label="Tapa verde"></button>
+              <button type="button" class="color-swatch product-variant" data-image="{% static 'img/img-remsa/img-home-productos/img-tapas.png' %}" data-label="Tapa roja" style="--swatch-color: #d62828;" aria-label="Tapa roja"></button>
+              <button type="button" class="color-swatch product-variant" data-image="{% static 'img/img-remsa/img-home-productos/img-tapas.png' %}" data-label="Tapa amarilla" style="--swatch-color: #f7c600;" aria-label="Tapa amarilla"></button>
+              <button type="button" class="color-swatch product-variant" data-image="{% static 'img/img-remsa/img-home-productos/img-tapas.png' %}" data-label="Tapa negra" style="--swatch-color: #1a1a1a;" aria-label="Tapa negra"></button>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        <a href="#" data-open-chat-modal aria-controls="chatbotPanel" class="btn btn-navy btn-lg mt-3">Solicitar información</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const mainImage = document.getElementById('product-main-image');
+    const imageCaption = document.getElementById('product-image-caption');
+    const variants = document.querySelectorAll('.product-variant');
+    variants.forEach((variant) => variant.addEventListener('click', function () {
+      mainImage.src = this.dataset.image;
+      mainImage.alt = this.dataset.label;
+      imageCaption.textContent = this.dataset.label;
+      mainImage.style.filter = this.dataset.filter || 'drop-shadow(0 20px 32px rgba(15, 52, 83, 0.12))';
+      variants.forEach((item) => item.classList.toggle('is-active', item === variant));
+    }));
+  });
+</script>
+{% endblock %}

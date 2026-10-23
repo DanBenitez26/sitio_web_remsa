@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="section-padding text-center" style="padding-block: var(--space-2xl);">
+  <div class="container">
+    <i class="bi bi-check-circle-fill" style="font-size:4rem; color: var(--color-success);"></i>
+    <h1 class="h3 mt-3">¡Solicitud enviada con éxito!</h1>
+    <p class="text-muted">Tu folio de seguimiento es:</p>
+    <p class="display-6 fw-bold" style="color: var(--color-navy-900);">{{ solicitud.folio }}</p>
+    <p class="text-muted">Hemos enviado la confirmación a tu correo. Nuestro equipo comercial te contactará pronto.</p>
+    <a href="{% url 'paginas:home' %}" class="btn btn-navy mt-3">Volver al inicio</a>
+  </div>
+</section>
+{% endblock %}

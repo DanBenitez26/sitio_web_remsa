@@ -1,0 +1,350 @@
+[
+{
+  "model": "core.configuracionsitio",
+  "pk": 1,
+  "fields": {
+    "nombre_empresa": "REMSA Plásticos",
+    "eslogan": "Fabricación nacional de envases y empaques de plástico desde 1994",
+    "telefono_principal": "999 000 0000",
+    "whatsapp_numero": "5219990000000",
+    "correo_comercial": "comercial@remsaplasticos.com",
+    "correo_notificaciones": "notificaciones@remsaplasticos.com",
+    "direccion": "Dirección pendiente de confirmar por REMSA",
+    "horario_atencion": "Lunes a viernes, horario por confirmar",
+    "mapa_embed_url": "",
+    "facebook_url": "",
+    "instagram_url": "",
+    "linkedin_url": "",
+    "anio_fundacion": 1994,
+    "texto_footer": "Fabricantes de envases y empaques de plástico PET, PEAD / HDPE y PP. Atención comercial directa, sin venta en línea."
+  }
+},
+{
+  "model": "catalogo.categoria",
+  "pk": 1,
+  "fields": {
+    "nombre": "Preformas",
+    "slug": "preformas",
+    "descripcion": "Preformas PET para soplado de botellas.",
+    "imagen": "",
+    "orden": 1,
+    "activo": true
+  }
+},
+{
+  "model": "catalogo.categoria",
+  "pk": 2,
+  "fields": {
+    "nombre": "Botellas",
+    "slug": "botellas",
+    "descripcion": "Botellas PET y PEAD para diversas aplicaciones.",
+    "imagen": "",
+    "orden": 2,
+    "activo": true
+  }
+},
+{
+  "model": "catalogo.categoria",
+  "pk": 3,
+  "fields": {
+    "nombre": "Garrafones",
+    "slug": "garrafones",
+    "descripcion": "Garrafones PEAD, incluyendo personalización.",
+    "imagen": "",
+    "orden": 3,
+    "activo": true
+  }
+},
+{
+  "model": "catalogo.categoria",
+  "pk": 4,
+  "fields": {
+    "nombre": "Tapas",
+    "slug": "tapas",
+    "descripcion": "Tapas y cierres para botellas y garrafones.",
+    "imagen": "",
+    "orden": 4,
+    "activo": true
+  }
+},
+{
+  "model": "catalogo.producto",
+  "pk": 1,
+  "fields": {
+    "nombre": "Preforma PET 28mm",
+    "slug": "preforma-pet-28mm",
+    "categoria": 1,
+    "tipo": "PREFORMA",
+    "descripcion_corta": "Preforma PET para soplado de botellas con boca estándar 28mm.",
+    "descripcion": "Preforma fabricada en PET, materia prima para la producción de botellas mediante proceso de soplado. Peso y altura configurables según la botella final requerida.",
+    "material": "PET",
+    "capacidad": "Boca 28mm",
+    "color": "Natural / Transparente",
+    "aplicaciones": "Agua purificada, bebidas y líquidos en general.",
+    "imagen_principal": "",
+    "activo": true,
+    "destacado": true,
+    "orden": 1,
+    "creado_en": "2026-09-17T02:53:38.722Z",
+    "actualizado_en": "2026-09-17T02:53:38.722Z"
+  }
+},
+{
+  "model": "catalogo.producto",
+  "pk": 2,
+  "fields": {
+    "nombre": "Botella PET 600ml",
+    "slug": "botella-pet-600ml",
+    "categoria": 2,
+    "tipo": "BOTELLA",
+    "descripcion_corta": "Botella PET soplada, capacidad 600ml.",
+    "descripcion": "Botella fabricada en PET mediante proceso de soplado a partir de preforma. Compatible con tapa rosca estándar.",
+    "material": "PET",
+    "capacidad": "600 ml",
+    "color": "Natural / A pigmentar",
+    "aplicaciones": "Agua purificada y bebidas.",
+    "imagen_principal": "",
+    "activo": true,
+    "destacado": true,
+    "orden": 2,
+    "creado_en": "2026-09-17T02:53:38.727Z",
+    "actualizado_en": "2026-09-17T02:53:38.727Z"
+  }
+},
+{
+  "model": "catalogo.producto",
+  "pk": 3,
+  "fields": {
+    "nombre": "Garrafón PEAD 19L",
+    "slug": "garrafon-pead-19l",
+    "categoria": 3,
+    "tipo": "GARRAFON",
+    "descripcion_corta": "Garrafón retornable de 19 litros en PEAD.",
+    "descripcion": "Garrafón fabricado en PEAD para agua purificada, con posibilidad de personalización de imagen mediante nuestro servicio de personalización de garrafones.",
+    "material": "PEAD",
+    "capacidad": "19 L",
+    "color": "Natural / Personalizable",
+    "aplicaciones": "Agua purificada retornable.",
+    "imagen_principal": "",
+    "activo": true,
+    "destacado": true,
+    "orden": 3,
+    "creado_en": "2026-09-17T02:53:38.730Z",
+    "actualizado_en": "2026-09-17T02:53:38.730Z"
+  }
+},
+{
+  "model": "catalogo.producto",
+  "pk": 4,
+  "fields": {
+    "nombre": "Tapa rosca 28mm",
+    "slug": "tapa-rosca-28mm",
+    "categoria": 4,
+    "tipo": "TAPA",
+    "descripcion_corta": "Tapa rosca compatible con botellas de boca 28mm.",
+    "descripcion": "Tapa de rosca fabricada en polietileno de alta densidad, compatible con botellas PET de boca estándar 28mm.",
+    "material": "PEAD",
+    "capacidad": "28mm",
+    "color": "Blanco / A pigmentar",
+    "aplicaciones": "Botellas de agua y bebidas.",
+    "imagen_principal": "",
+    "activo": true,
+    "destacado": true,
+    "orden": 4,
+    "creado_en": "2026-09-17T02:53:38.735Z",
+    "actualizado_en": "2026-09-17T02:53:38.735Z"
+  }
+},
+{
+  "model": "catalogo.producto",
+  "pk": 5,
+  "fields": {
+    "nombre": "Preforma PET 1881",
+    "slug": "preforma-pet-1881",
+    "categoria": 1,
+    "tipo": "PREFORMA",
+    "descripcion_corta": "Preforma PET boca 1881, formato ligero.",
+    "descripcion": "Preforma PET de boca 1881, utilizada para botellas de peso ligero (light-weight).",
+    "material": "PET",
+    "capacidad": "Boca 1881",
+    "color": "Natural / Transparente",
+    "aplicaciones": "Agua embotellada de bajo gramaje.",
+    "imagen_principal": "",
+    "activo": true,
+    "destacado": false,
+    "orden": 5,
+    "creado_en": "2026-09-17T02:53:38.737Z",
+    "actualizado_en": "2026-09-17T02:53:38.737Z"
+  }
+},
+{
+  "model": "catalogo.producto",
+  "pk": 6,
+  "fields": {
+    "nombre": "Garrafón PEAD 10L",
+    "slug": "garrafon-pead-10l",
+    "categoria": 3,
+    "tipo": "GARRAFON",
+    "descripcion_corta": "Garrafón de 10 litros en PEAD.",
+    "descripcion": "Garrafón fabricado en PEAD, formato de 10 litros, también disponible con servicio de personalización.",
+    "material": "PEAD",
+    "capacidad": "10 L",
+    "color": "Natural / Personalizable",
+    "aplicaciones": "Agua purificada.",
+    "imagen_principal": "",
+    "activo": true,
+    "destacado": false,
+    "orden": 6,
+    "creado_en": "2026-09-17T02:53:38.739Z",
+    "actualizado_en": "2026-09-17T02:53:38.739Z"
+  }
+},
+{
+  "model": "catalogo.producto",
+  "pk": 8,
+  "fields": {
+    "nombre": "Tapa de seguridad garrafón",
+    "slug": "tapa-de-seguridad-garrafon",
+    "categoria": 4,
+    "tipo": "TAPA",
+    "descripcion_corta": "Tapa de seguridad para garrafón retornable.",
+    "descripcion": "Tapa con sello de seguridad para garrafones retornables de 19L y 10L.",
+    "material": "PEAD",
+    "capacidad": "Compatible 19L / 10L",
+    "color": "Blanco / Azul",
+    "aplicaciones": "Garrafones de agua purificada.",
+    "imagen_principal": "",
+    "activo": true,
+    "destacado": false,
+    "orden": 8,
+    "creado_en": "2026-09-17T02:53:38.743Z",
+    "actualizado_en": "2026-09-17T02:53:38.743Z"
+  }
+},
+{
+  "model": "catalogo.especificacionproducto",
+  "pk": 1,
+  "fields": {
+    "producto": 1,
+    "nombre": "Tipo de boca",
+    "valor": "28mm PCO",
+    "orden": 0
+  }
+},
+{
+  "model": "catalogo.especificacionproducto",
+  "pk": 2,
+  "fields": {
+    "producto": 1,
+    "nombre": "Material",
+    "valor": "PET virgen o reciclado según especificación",
+    "orden": 1
+  }
+},
+{
+  "model": "catalogo.especificacionproducto",
+  "pk": 3,
+  "fields": {
+    "producto": 2,
+    "nombre": "Capacidad",
+    "valor": "600 ml",
+    "orden": 0
+  }
+},
+{
+  "model": "catalogo.especificacionproducto",
+  "pk": 4,
+  "fields": {
+    "producto": 3,
+    "nombre": "Capacidad",
+    "valor": "19 L",
+    "orden": 0
+  }
+},
+{
+  "model": "catalogo.especificacionproducto",
+  "pk": 5,
+  "fields": {
+    "producto": 3,
+    "nombre": "Material",
+    "valor": "PEAD",
+    "orden": 1
+  }
+},
+{
+  "model": "catalogo.especificacionproducto",
+  "pk": 6,
+  "fields": {
+    "producto": 4,
+    "nombre": "Compatibilidad",
+    "valor": "Boca 28mm",
+    "orden": 0
+  }
+},
+{
+  "model": "catalogo.servicio",
+  "pk": 1,
+  "fields": {
+    "nombre": "Personalización de garrafones",
+    "slug": "personalizacion-de-garrafones",
+    "descripcion_corta": "Personaliza tus garrafones con la imagen de tu marca.",
+    "descripcion": "Servicio de personalización de garrafones para que tu marca tenga presencia directa en el envase retornable. Consulta condiciones y volúmenes mínimos con nuestro equipo comercial.",
+    "icono": "bi-droplet",
+    "imagen": "",
+    "activo": true,
+    "orden": 1
+  }
+},
+{
+  "model": "catalogo.servicio",
+  "pk": 2,
+  "fields": {
+    "nombre": "Pigmentado de envases",
+    "slug": "pigmentado-de-envases",
+    "descripcion_corta": "Pigmentado de botellas y envases según la paleta de tu marca.",
+    "descripcion": "Ofrecemos pigmentado de envases para adaptar el color del producto final a tus necesidades de marca. Sujeto a factibilidad técnica por tipo de producto.",
+    "icono": "bi-palette",
+    "imagen": "",
+    "activo": true,
+    "orden": 2
+  }
+},
+{
+  "model": "catalogo.servicio",
+  "pk": 3,
+  "fields": {
+    "nombre": "Protección UV",
+    "slug": "proteccion-uv",
+    "descripcion_corta": "Aditivos de protección UV para prolongar la vida útil del contenido.",
+    "descripcion": "Servicio configurable de protección UV para envases que lo requieran, sujeto a factibilidad técnica y validación con el equipo comercial.",
+    "icono": "bi-shield-check",
+    "imagen": "",
+    "activo": true,
+    "orden": 3
+  }
+},
+{
+  "model": "paginas.testimonio",
+  "pk": 1,
+  "fields": {
+    "nombre": "Cliente de ejemplo A",
+    "empresa": "[Empresa de ejemplo — sustituir con testimonio real]",
+    "contenido": "Contenido de testimonio de ejemplo para fines de maquetación. Sustituir con un testimonio real y autorizado por el cliente.",
+    "calificacion": 5,
+    "activo": true,
+    "orden": 1
+  }
+},
+{
+  "model": "paginas.testimonio",
+  "pk": 2,
+  "fields": {
+    "nombre": "Cliente de ejemplo B",
+    "empresa": "[Empresa de ejemplo — sustituir con testimonio real]",
+    "contenido": "Contenido de testimonio de ejemplo para fines de maquetación. Sustituir con un testimonio real y autorizado por el cliente.",
+    "calificacion": 5,
+    "activo": true,
+    "orden": 2
+  }
+}
+]

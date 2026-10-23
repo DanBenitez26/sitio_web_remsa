@@ -1,0 +1,23 @@
+
+# Python y Django
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+
+# Variables y secretos
+.env
+.env.*
+!.env.example
+
+# Bases de datos locales
+*.sqlite3
+
+# Archivos generados
+staticfiles/
+media/uploads/
+logs/*.log
+
+# Editor y sistema
+.vscode/
+.DS_Store

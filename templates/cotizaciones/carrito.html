@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static widget_tweaks %}
+{% block content %}
+
+<div class="breadcrumb-remsa">
+  <div class="container">
+    <nav aria-label="breadcrumb"><ol class="breadcrumb mb-0">
+      <li class="breadcrumb-item"><a href="{% url 'paginas:home' %}">Inicio</a></li>
+      <li class="breadcrumb-item active">Solicitud de cotización</li>
+    </ol></nav>
+  </div>
+</div>
+
+<section class="section-padding" style="padding-block: var(--space-lg);">
+  <div class="container">
+    <h1 class="h3 mb-4">Tu solicitud de cotización</h1>
+
+    <div class="row g-5">
+      <div class="col-lg-7">
+        <h2 class="h6 mb-3">Productos ({{ total_productos }})</h2>
+        {% for item in items %}
+        <div class="d-flex align-items-center gap-3 border rounded p-3 mb-3">
+          {% if item.producto.imagen_principal %}
+          <img src="{{ item.producto.imagen_principal.url }}" style="width:72px;height:72px;object-fit:cover;border-radius:8px;" alt="{{ item.producto.nombre }}">
+          {% else %}
+          <div class="img-placeholder" style="width:72px;height:72px;min-height:auto;border-radius:8px;">Sin img</div>
+          {% endif %}
+          <div class="flex-grow-1">
+            <p class="mb-0 fw-semibold">{{ item.producto.nombre }}</p>
+            <p class="mb-0 small text-muted">{{ item.producto.get_material_display }} · {{ item.producto.capacidad }}</p>
+          </div>
+          <form method="post" action="{% url 'cotizaciones:actualizar' item.producto.pk %}" class="d-flex align-items-center gap-2">
+            {% csrf_token %}
+            <input type="number" name="cantidad" value="{{ item.cantidad }}" min="0" class="form-control form-control-sm input-cantidad-carrito" style="width:70px;">
+          </form>
+          <a href="#" class="btn btn-sm btn-outline-danger btn-eliminar-item"
+             onclick="event.preventDefault(); document.getElementById('form-eliminar-{{ item.producto.pk }}').submit();">
+            <i class="bi bi-trash"></i>
+          </a>
+          <form id="form-eliminar-{{ item.producto.pk }}" method="post" action="{% url 'cotizaciones:eliminar' item.producto.pk %}" class="d-none">{% csrf_token %}</form>
+        </div>
+        {% empty %}
+        <div class="alert alert-info">
+          Aún no has agregado productos. <a href="{% url 'catalogo:lista' %}">Explora el catálogo</a> y da clic en "Cotizar".
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="col-lg-5">
+        <div class="p-4" style="background: var(--color-gray-50); border-radius: var(--radius-md);">
+          <h2 class="h6 mb-3">Tus datos</h2>
+          <form method="post" class="needs-validation" novalidate>
+            {% csrf_token %}
+            {{ form.sitio_web }}
+            <div class="mb-3">
+              <label class="form-label">Nombre completo *</label>
+              {{ form.nombre|add_class:"form-control" }}
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Empresa</label>
+              {{ form.empresa|add_class:"form-control" }}
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Correo electrónico *</label>
+                {{ form.correo|add_class:"form-control" }}
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Teléfono</label>
+                {{ form.telefono|add_class:"form-control" }}
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Ciudad</label>
+              {{ form.ciudad|add_class:"form-control" }}
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Mensaje adicional</label>
+              {{ form.mensaje|add_class:"form-control" }}
+            </div>
+            <button type="submit" class="btn btn-navy btn-lg w-100" {% if not items %}disabled{% endif %}>
+              <i class="bi bi-send me-2"></i>Enviar solicitud de cotización
+            </button>
+            <p class="small text-muted mt-2 mb-0">
+              Al enviar recibirás un folio de seguimiento. No se procesan pagos en línea; nuestro equipo comercial te contactará.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block extra_js %}<script src="{% static 'js/carrito.js' %}"></script>{% endblock %}

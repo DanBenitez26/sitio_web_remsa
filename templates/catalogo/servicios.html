@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="breadcrumb-remsa">
+  <div class="container">
+    <nav aria-label="breadcrumb"><ol class="breadcrumb mb-0">
+      <li class="breadcrumb-item"><a href="{% url 'paginas:home' %}">Inicio</a></li>
+      <li class="breadcrumb-item active">Soluciones</li>
+    </ol></nav>
+  </div>
+</div>
+<section class="soluciones-hero" aria-labelledby="soluciones-title">
+  <div class="soluciones-hero-copy">
+    <div class="soluciones-hero-copy-inner">
+      <span class="soluciones-hero-eyebrow"><i class="bi bi-stars" aria-hidden="true"></i> Soluciones REMSA</span>
+      <h1 id="soluciones-title">Soluciones que hacen destacar tu envase.</h1>
+      <p>Personalización, pigmentado y opciones de acabado para dar forma a envases alineados con tu producto y tu marca.</p>
+      <div class="soluciones-hero-actions">
+        <a class="btn btn-light" href="#soluciones-disponibles">Explorar soluciones <i class="bi bi-arrow-down ms-1" aria-hidden="true"></i></a>
+        <a class="soluciones-hero-contact" href="#" data-open-chat-modal aria-controls="chatbotPanel">Hablar con un asesor <i class="bi bi-arrow-up-right ms-1" aria-hidden="true"></i></a>
+      </div>
+      <span class="soluciones-hero-footnote"><i class="bi bi-check2-circle" aria-hidden="true"></i> Opciones sujetas a factibilidad técnica</span>
+    </div>
+  </div>
+  <div class="soluciones-hero-image">
+    <img src="{% static 'img/img-remsa/img_soluciones.png' %}" alt="Soluciones de envase REMSA" fetchpriority="high">
+    <span class="soluciones-image-caption"><i class="bi bi-box-seam" aria-hidden="true"></i> Calidad y atención en cada etapa</span>
+  </div>
+</section>
+
+<section id="soluciones-disponibles" class="section-padding soluciones-listado">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-title-eyebrow">Soluciones para tu producto</div>
+      <h2>Personalización y acabado</h2>
+      <p class="text-muted">Explora las opciones disponibles y encuentra el acabado adecuado para tu envase.</p>
+    </div>
+    <div class="row g-4">
+      {% for servicio in servicios %}
+      <div class="col-md-6 col-lg-4">
+        <div class="card-servicio h-100">
+          <div class="icono-servicio">
+            {% if servicio.slug == 'personalizacion-de-garrafones' %}
+            <i class="bi bi-box-seam" aria-hidden="true"></i>
+            {% elif servicio.slug == 'pigmentado-de-envases' %}
+            <i class="bi bi-palette-fill" aria-hidden="true"></i>
+            {% elif servicio.slug == 'proteccion-uv' %}
+            <i class="bi bi-sun-fill" aria-hidden="true"></i>
+            {% else %}
+            <i class="bi {{ servicio.icono|default:'bi-gear' }}" aria-hidden="true"></i>
+            {% endif %}
+          </div>
+          <h2 class="h5">{{ servicio.nombre }}</h2>
+          <p class="card-text-muted">{{ servicio.descripcion_corta }}</p>
+          {% if servicio.slug == 'proteccion-uv' %}
+          <button type="button" class="servicio-conocer-mas fw-semibold" data-bs-toggle="modal" data-bs-target="#proteccionUvModal">
+            Conocer más <i class="bi bi-arrow-right" aria-hidden="true"></i>
+          </button>
+          {% else %}
+          <a href="{{ servicio.get_absolute_url }}" class="fw-semibold">Conocer más <i class="bi bi-arrow-right"></i></a>
+          {% endif %}
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12 text-center text-muted py-5">Aún no hay soluciones configuradas en Django Admin.</div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<div class="modal fade proteccion-uv-modal" id="proteccionUvModal" tabindex="-1" aria-labelledby="proteccionUvModalTitle" aria-describedby="proteccionUvModalDescription">
+  <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <span class="proteccion-uv-eyebrow"><i class="bi bi-sun" aria-hidden="true"></i> Aditivos para envases</span>
+          <h2 class="modal-title h4" id="proteccionUvModalTitle">Protección UV</h2>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <p class="proteccion-uv-description" id="proteccionUvModalDescription">
+          Los aditivos con protección UV se incorporan al material del envase para ayudar a reducir los efectos de la exposición a la radiación ultravioleta. La selección depende del material, el producto y las condiciones de uso, por lo que cada aplicación se revisa con el equipo de REMSA.
+        </p>
+        <div class="proteccion-uv-illustrations-label">
+          <i class="bi bi-box-seam" aria-hidden="true"></i>
+          Envases de referencia
+        </div>
+        <div class="row g-3">
+          <div class="col-12 col-sm-4">
+            <figure class="proteccion-uv-illustration">
+              <img src="{% static 'img/img-remsa/Botella Pet.png' %}" alt="Botella PET, imagen ilustrativa de un envase que puede evaluarse para protección UV" loading="lazy">
+              <figcaption>Botellas PET</figcaption>
+            </figure>
+          </div>
+          <div class="col-12 col-sm-4">
+            <figure class="proteccion-uv-illustration">
+              <img src="{% static 'img/img-remsa/Garrafas Pet.png' %}" alt="Garrafas PET, imagen ilustrativa de un envase que puede evaluarse para protección UV" loading="lazy">
+              <figcaption>Garrafas PET</figcaption>
+            </figure>
+          </div>
+          <div class="col-12 col-sm-4">
+            <figure class="proteccion-uv-illustration">
+              <img src="{% static 'img/img-remsa/Garrafas Pead.png' %}" alt="Garrafas PEAD, imagen ilustrativa de un envase que puede evaluarse para protección UV" loading="lazy">
+              <figcaption>Garrafas PEAD</figcaption>
+            </figure>
+          </div>
+        </div>
+        <p class="proteccion-uv-disclaimer mb-0">Las imágenes son ilustrativas. La protección UV y su factibilidad se confirman para cada proyecto; no implican una garantía de protección total ni de vida útil específica.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <a href="#" data-open-chat-modal aria-controls="chatbotPanel" class="btn btn-navy">Consultar con un asesor <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="soluciones-calidad">
+  <div class="container">
+    <div class="soluciones-calidad-copy">
+      <div class="section-title-eyebrow">Experiencia REMSA</div>
+      <h2>Atención al detalle, desde la planta</h2>
+      <p>Más de 30 años de experiencia en envases nos permiten acompañar cada proyecto desde la selección de la solución hasta su fabricación.</p>
+      <ul>
+        <li><i class="bi bi-check2" aria-hidden="true"></i> Experiencia en envases PET, PEAD y PP</li>
+        <li><i class="bi bi-check2" aria-hidden="true"></i> Opciones de color y personalización</li>
+        <li><i class="bi bi-check2" aria-hidden="true"></i> Atención directa para revisar cada requerimiento</li>
+      </ul>
+    </div>
+    <figure class="soluciones-calidad-image">
+      <img src="{% static 'img/img-remsa/laboratorio_remsa.png' %}" alt="Equipo REMSA revisando envases de plástico en el laboratorio" loading="lazy">
+      <figcaption><i class="bi bi-search-heart" aria-hidden="true"></i> Revisión de envases y acompañamiento técnico</figcaption>
+    </figure>
+  </div>
+</section>
+
+  <section class="servicios-especiales section-padding soluciones-especiales">
+    <div class="container">
+      <div class="servicios-especiales-heading">
+        <div>
+          <div class="section-title-eyebrow">Más opciones de acabado</div>
+          <h2>Soluciones que dan forma a tu marca</h2>
+        </div>
+        <p>Sumamos experiencia técnica y flexibilidad de producción para que tu presentación sea tan sólida como tu producto.</p>
+      </div>
+
+      <div class="servicios-especiales-grid">
+        <article class="servicio-especial-card">
+          <div class="servicio-especial-meta"><span>01</span><i class="bi bi-award"></i></div>
+          <img class="soluciones-especial-image" src="{% static 'img/img-remsa/img-soluciones/img_personalización.png' %}" alt="Garrafones de distintos colores como referencia para personalización REMSA" loading="lazy">
+          <h3>Personalización de garrafones de PET</h3>
+          <p>En el garrafón de 20 L, con asa y boca roscada de 56 mm, personalizamos mediante dos insertos con el grabado de su marca en alto relieve y/o variación de colores en el cuerpo y el asa.</p>
+          <a href="#" data-open-chat-modal aria-controls="chatbotPanel">Consultar condiciones y volúmenes mínimos <i class="bi bi-arrow-right ms-1"></i></a>
+        </article>
+
+        <article class="servicio-especial-card">
+          <div class="servicio-especial-meta"><span>02</span><i class="bi bi-bezier2"></i></div>
+          <div class="soluciones-especial-pair">
+            <figure>
+              <img src="{% static 'img/img-remsa/img-soluciones/img_botella.png' %}" alt="Botella PET como referencia para el desarrollo de modelos" loading="lazy">
+              <figcaption>Botella PET</figcaption>
+            </figure>
+            <figure>
+              <img src="{% static 'img/img-remsa/img-soluciones/img_pead.png' %}" alt="Envase PEAD como referencia para el desarrollo de modelos" loading="lazy">
+              <figcaption>Envase PEAD</figcaption>
+            </figure>
+          </div>
+          <h3>Desarrollo de modelos especiales</h3>
+          <p>Desarrollamos nuevos modelos de botellas, inclusive para uso exclusivo, acompañando cada proyecto desde la idea hasta su fabricación.</p>
+          <a href="#" data-open-chat-modal aria-controls="chatbotPanel">Consultar condiciones y volúmenes mínimos <i class="bi bi-arrow-right ms-1"></i></a>
+        </article>
+
+        <article class="servicio-especial-card">
+          <div class="servicio-especial-meta"><span>03</span><i class="bi bi-palette"></i></div>
+          <img class="soluciones-especial-image soluciones-especial-image--pigmentado" src="{% static 'img/img-remsa/img-soluciones/img_envases_varios.png' %}" alt="Garrafones y botellas PET y PEAD en diferentes colores" loading="lazy">
+          <div class="soluciones-pigmento-palette" aria-label="Colores de referencia para pigmentado: azul cielo, azul cobalto, verde, morado y rojo">
+            <span title="Azul cielo" style="--pigmento-color:#75c9ed"></span>
+            <span title="Azul cobalto" style="--pigmento-color:#174fbd"></span>
+            <span title="Verde" style="--pigmento-color:#20a36b"></span>
+            <span title="Morado" style="--pigmento-color:#8d48bd"></span>
+            <span title="Rojo" style="--pigmento-color:#e3423a"></span>
+            <small>Colores de referencia</small>
+          </div>
+          <h3>Pigmentado de envases</h3>
+          <p>Las botellas de PET y las garrafas de PEAD pueden pigmentarse en los colores que tu producto necesite para lograr una presentación más atractiva. También ofrecemos protección UV al fabricar envases de PET.</p>
+          <a href="#" data-open-chat-modal aria-controls="chatbotPanel">Consultar condiciones y volúmenes mínimos <i class="bi bi-arrow-right ms-1"></i></a>
+        </article>
+
+        <article class="servicio-especial-card">
+          <div class="servicio-especial-meta"><span>04</span><i class="bi bi-tag"></i></div>
+          <img class="soluciones-especial-image" src="{% static 'img/img-remsa/img-soluciones/img_botella.png' %}" alt="Botella PET como referencia para etiquetado" loading="lazy">
+          <h3>Etiquetado de botellas PET</h3>
+          <p>En la mayoría de nuestras botellas PET ofrecemos la colocación de etiquetas de Polipropileno Bio Orientado (BOPP).</p>
+          <p class="servicio-nota"><i class="bi bi-info-circle"></i> Preguntar volúmenes mínimos requeridos.</p>
+          <a href="#" data-open-chat-modal aria-controls="chatbotPanel">Consultar condiciones y volúmenes mínimos <i class="bi bi-arrow-right ms-1"></i></a>
+        </article>
+      </div>
+
+      <div class="personalizacion-callout">
+        <div class="personalizacion-callout-icon"><i class="bi bi-lightbulb"></i></div>
+        <div>
+          <div class="section-title-eyebrow">Soluciones para tu envase</div>
+          <h2>Haz que tu envase te distinga</h2>
+          <p>¿Le gustaría contar con un envase personalizado que lo distinga de la competencia? Contamos con personal capacitado para el desarrollo de proyectos. Permítanos asesorarlo para elegir la opción que más se adapte a las características de su negocio.</p>
+        </div>
+        <a class="btn btn-navy" href="#" data-open-chat-modal aria-controls="chatbotPanel">Hablar con un asesor <i class="bi bi-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+{% endblock %}

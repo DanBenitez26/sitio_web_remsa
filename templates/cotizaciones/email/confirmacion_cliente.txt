@@ -1,0 +1,12 @@
+Hola {{ cliente.nombre }},
+
+Hemos recibido tu solicitud de cotización con folio {{ solicitud.folio }}.
+
+Resumen de productos solicitados:
+{% for item in items %}- {{ item.cantidad }} x {{ item.producto.nombre }}
+{% endfor %}
+Nuestro equipo comercial revisará tu solicitud y se pondrá en contacto contigo a la brevedad.
+
+Este es un mensaje generado automáticamente, favor de no responder directamente a este correo.
+
+REMSA Plásticos

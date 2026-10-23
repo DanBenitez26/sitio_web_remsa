@@ -1,0 +1,53 @@
+{% load static %}
+<footer class="footer-remsa pt-5">
+  <div class="container pb-4">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="logo-footer">
+          <img src="{% static 'img/logo/logo_remsa.png' %}" alt="REMSA Plásticos">
+        </div>
+        <p class="small">
+          <strong>Soluciones que toman forma.</strong><br>
+          Desde 1994, desarrollamos y fabricamos envases plásticos que ayudan a nuestros clientes a proteger, presentar y transportar sus productos.
+        </p>
+        <div class="mt-3">
+          {% if config_sitio.facebook_url %}<a href="{{ config_sitio.facebook_url }}" class="social-icon" target="_blank" rel="noopener"><i class="bi bi-facebook"></i></a>{% endif %}
+          {% if config_sitio.instagram_url %}<a href="{{ config_sitio.instagram_url }}" class="social-icon" target="_blank" rel="noopener"><i class="bi bi-instagram"></i></a>{% endif %}
+          {% if config_sitio.linkedin_url %}<a href="{{ config_sitio.linkedin_url }}" class="social-icon" target="_blank" rel="noopener"><i class="bi bi-linkedin"></i></a>{% endif %}
+        </div>
+      </div>
+      <div class="col-lg-2 col-6">
+        <h6>Navegación</h6>
+        <ul class="list-unstyled small">
+          <li class="mb-2"><a href="{% url 'paginas:home' %}">Inicio</a></li>
+          <li class="mb-2"><a href="{% url 'catalogo:lista' %}">Catálogo</a></li>
+          <li class="mb-2"><a href="{% url 'catalogo:servicios' %}">Soluciones</a></li>
+          <li class="mb-2"><a href="{% url 'paginas:nosotros' %}">Nosotros</a></li>
+          <li class="mb-2"><a href="{% url 'contacto:contacto' %}">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-6">
+        <h6>Legal</h6>
+        <ul class="list-unstyled small">
+          <li class="mb-2"><a href="{% url 'paginas:privacidad' %}">Aviso de Privacidad</a></li>
+          <li class="mb-2"><a href="{% url 'paginas:terminos' %}">Términos y Condiciones</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4">
+        <h6>Contacto</h6>
+        <ul class="list-unstyled small">
+          {% if config_sitio.direccion %}<li class="mb-2"><i class="bi bi-geo-alt-fill me-2"></i>{{ config_sitio.direccion|linebreaksbr }}</li>{% endif %}
+          {% if config_sitio.telefono_principal %}<li class="mb-2"><i class="bi bi-telephone-fill me-2"></i><a href="tel:{{ config_sitio.telefono_principal }}">{{ config_sitio.telefono_principal }}</a></li>{% endif %}
+          {% if config_sitio.telefono_secundario %}<li class="mb-2"><i class="bi bi-telephone-fill me-2"></i><a href="tel:{{ config_sitio.telefono_secundario }}">{{ config_sitio.telefono_secundario }}</a></li>{% endif %}
+          {% if config_sitio.correo_comercial %}<li class="mb-2"><i class="bi bi-envelope-fill me-2"></i><a href="mailto:{{ config_sitio.correo_comercial }}">{{ config_sitio.correo_comercial }}</a></li>{% endif %}
+          {% if config_sitio.horario_atencion %}<li class="mb-2"><i class="bi bi-clock-fill me-2"></i>{{ config_sitio.horario_atencion }}</li>{% endif %}
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom text-center">
+    <div class="container">
+      &copy; {% now "Y" %} {{ config_sitio.nombre_empresa }}. Todos los derechos reservados.
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,22 @@
+{% load static %}
+<div class="topbar d-none d-md-block">
+  <div class="container d-flex justify-content-between align-items-center py-2">
+    <div class="d-flex gap-4">
+      <span class="topbar-item"><i class="bi bi-flag-fill text-cyan"></i> Fabricación nacional</span>
+      <span class="topbar-item"><i class="bi bi-truck text-cyan"></i> Entregas sujetas a cobertura</span>
+      <span class="topbar-item"><i class="bi bi-recycle text-cyan"></i> Materiales reciclables</span>
+    </div>
+    <div class="d-flex gap-4">
+      {% if config_sitio.telefono_principal %}
+      <a href="tel:{{ config_sitio.telefono_principal }}" class="topbar-item">
+        <i class="bi bi-telephone-fill"></i> {{ config_sitio.telefono_principal }}
+      </a>
+      {% endif %}
+      {% if config_sitio.correo_comercial %}
+      <a href="mailto:{{ config_sitio.correo_comercial }}" class="topbar-item">
+        <i class="bi bi-envelope-fill"></i> {{ config_sitio.correo_comercial }}
+      </a>
+      {% endif %}
+    </div>
+  </div>
+</div>

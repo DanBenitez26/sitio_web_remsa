@@ -1,0 +1,248 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-content">
+    <div class="row align-items-center g-5">
+      <div class="col-xl-5">
+        <div class="hero-copy-card">
+          <div class="hero-floating-icons" aria-hidden="true">
+            <div class="hero-floating-item">
+              <img class="hero-floating-icon hero-floating-icon-product" src="{% static 'img/img-remsa/img-icono.png' %}?v=2" alt="">
+              <span class="hero-floating-label">Envases sostenibles</span>
+            </div>
+            <div class="hero-floating-item">
+              <img class="hero-floating-icon hero-floating-icon-packages" src="{% static 'img/img-remsa/img-empaques.png' %}" alt="">
+              <span class="hero-floating-label hero-floating-label-packages">Soluciones de empaque</span>
+            </div>
+          </div>
+          <span class="badge hero-origin-badge mb-3">
+            Fabricación nacional desde {{ config_sitio.anio_fundacion }}
+          </span>
+          <h1 class="mb-3">Remsa</h1>
+          <p class="hero-company-name">Recipientes y Empaques de México</p>
+         
+            <p class="lead mb-4">
+            En REMSA fabricamos preformas, botellas, garrafones, garrafas, frascos, tapas y asas en PET, PEAD y Polipropileno, ofreciendo soluciones de empaque para diferentes industrias.
+            Contamos con tecnología industrial y atención comercial directa, brindando productos confiables y soluciones adaptadas a las necesidades de cada cliente.
+          </p>
+          <div class="d-flex flex-wrap gap-3">
+            <a href="{% url 'catalogo:lista' %}" class="btn btn-outline-cyan btn-lg">
+              <i class="bi bi-box-seam me-2"></i>Ver catálogo
+            </a>
+            <button type="button" class="btn btn-navy btn-lg hero-contact-btn" data-open-chat-modal aria-controls="chatbotPanel">
+              <i class="bi bi-chat-dots me-2"></i>Solicitar cotización
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-7">
+        <div class="hero-visual reveal">
+          <div class="hero-values" aria-label="Atributos de REMSA">
+            <span><i class="bi bi-award" aria-hidden="true"></i>Calidad</span>
+            <span><i class="bi bi-cpu" aria-hidden="true"></i>Tecnología</span>
+            <span><i class="bi bi-clock-history" aria-hidden="true"></i>Experiencia</span>
+            <span><i class="bi bi-headset" aria-hidden="true"></i>Atención directa</span>
+          </div>
+          <div class="hero-envases-frame">
+            <span class="hero-envases-glint" aria-hidden="true"></span>
+            <img class="hero-envases-image" src="{% static 'img/img-remsa/img_hero_envase.png' %}" alt="Envases y soluciones de empaque fabricados por REMSA">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDICADORES -->
+<section class="section-padding py-5" style="padding-block: var(--space-lg);">
+  <div class="container">
+    <div class="row">
+      <div class="col-6 col-lg-3 indicador reveal">
+        <div class="numero">+<span class="cyan">30</span></div>
+        <div class="etiqueta">Años de experiencia</div>
+      </div>
+      <div class="col-6 col-lg-3 indicador reveal">
+        <div class="numero">PET / PEAD / HDPE</div>
+        <div class="etiqueta">Materiales de fabricación</div>
+      </div>
+      <div class="col-6 col-lg-3 indicador reveal">
+        <div class="numero"><span class="cyan">B2B</span></div>
+        <div class="etiqueta">Atención comercial directa</div>
+      </div>
+      <div class="col-6 col-lg-3 indicador reveal">
+        <div class="numero"><i class="bi bi-recycle cyan" style="color:var(--color-cyan-500);"></i></div>
+        <div class="etiqueta">Materiales reciclables</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRESENCIA COMERCIAL Y OPERATIVA -->
+<section class="presencia-home" aria-label="Presencia comercial y operativa">
+  <div class="container">
+    <div class="row g-4 align-items-stretch">
+      <div class="col-lg-7">
+        <div class="presencia-home-frame reveal">
+          <img src="{% static 'img/img-remsa/img_presencia_comercial_remsa.png' %}" alt="Presencia comercial y operativa de REMSA en México, Centroamérica y el Caribe" loading="lazy">
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <article class="impacto-ambiental-card reveal h-100">
+          <div class="impacto-ambiental-copy">
+            <div class="section-title-eyebrow">Impacto ambiental</div>
+            <h2>Empaques responsables para un futuro más sostenible</h2>
+            <p>En REMSA entendemos el impacto ambiental de nuestros productos y operaciones; por eso, todos nuestros envases son 100% reciclables y contribuyen a reducir la huella ecológica.</p>
+            <p>Trabajamos continuamente en soluciones más amigables con el ambiente, impulsando la economía circular y optimizando el uso y tratamiento del agua para mejorar nuestra huella hídrica.</p>
+          </div>
+          <img class="impacto-ambiental-image" src="{% static 'img/img-remsa/img-ambiente.png' %}" alt="Planeta con símbolo de reciclaje, representando el compromiso ambiental de REMSA" loading="lazy">
+          <img class="impacto-ambiental-logo" src="{% static 'img/logo/logo_remsa.png' %}" alt="REMSA Plásticos" loading="lazy">
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTOS DESTACADOS -->
+<section class="section-padding productos-destacados-section">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <div class="section-title-eyebrow">Catálogo</div>
+      <h2>Productos destacados</h2>
+      <p class="text-muted">Una muestra de nuestras líneas de preformas, botellas, garrafones y tapas.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="card card-producto h-100">
+          <img src="{% static 'img/img-remsa/img-home-productos/img_preformas_pet.png' %}" class="card-img-top" alt="Preformas de PET" loading="lazy">
+          <div class="card-body">
+            <span class="badge badge-material mb-2">PET</span>
+            <h3 class="card-title h6">Preformas</h3>
+            <p class="card-text-muted">Preformas de PET para diferentes capacidades y aplicaciones.</p>
+            <a href="{% url 'catalogo:lista' %}" class="btn btn-sm btn-navy w-100">Ver productos</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="card card-producto h-100">
+          <img src="{% static 'img/img-remsa/img-home-productos/img-botella-pet.png' %}" class="card-img-top" alt="Botellas de PET" loading="lazy">
+          <div class="card-body">
+            <span class="badge badge-material mb-2">PET</span>
+            <h3 class="card-title h6">Botellas PET</h3>
+            <p class="card-text-muted">Botellas PET para productos con una presentación confiable.</p>
+            <a href="{% url 'catalogo:lista' %}" class="btn btn-sm btn-navy w-100">Ver productos</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="card card-producto h-100">
+          <img src="{% static 'img/img-remsa/img-home-productos/envase-garrafon-pet.png' %}" class="card-img-top" alt="Garrafones de PET" loading="lazy">
+          <div class="card-body">
+            <span class="badge badge-material mb-2">PET</span>
+            <h3 class="card-title h6">Garrafones PET</h3>
+            <p class="card-text-muted">Garrafones PET para agua y otras soluciones de envasado.</p>
+            <a href="{% url 'catalogo:lista' %}" class="btn btn-sm btn-navy w-100">Ver productos</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="card card-producto h-100">
+          <img src="{% static 'img/img-remsa/img-home-productos/img-tapas.png' %}" class="card-img-top" alt="Tapas para envases" loading="lazy">
+          <div class="card-body">
+            <span class="badge badge-material mb-2">PP</span>
+            <h3 class="card-title h6">Tapas</h3>
+            <p class="card-text-muted">Tapas y componentes para completar tus soluciones de empaque.</p>
+            <a href="{% url 'catalogo:lista' %}" class="btn btn-sm btn-navy w-100">Ver productos</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="productos-home-banner reveal">
+      <img src="{% static 'img/img-remsa/img_home_envases.png' %}" alt="Línea de envases REMSA" loading="lazy">
+    </div>
+    <div class="text-center mt-4">
+      <a href="{% url 'catalogo:lista' %}" class="btn btn-navy">Ver catálogo completo <i class="bi bi-arrow-right ms-1"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO DE FABRICACION -->
+<section class="section-padding proceso-home">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <div class="section-title-eyebrow">Cómo trabajamos</div>
+      <h2>Proceso de fabricación y atención comercial</h2>
+    </div>
+    <div class="row">
+      <div class="col-md-3 paso-proceso reveal">
+        <div class="paso-numero">1</div>
+        <h3 class="h6">Solicitud de cotización</h3>
+        <p class="small">Envías tu solicitud desde el catálogo o contacto directo.</p>
+      </div>
+      <div class="col-md-3 paso-proceso reveal">
+        <div class="paso-numero">2</div>
+        <h3 class="h6">Revisión comercial</h3>
+        <p class="small">Nuestro equipo evalúa capacidad, material y personalización.</p>
+      </div>
+      <div class="col-md-3 paso-proceso reveal">
+        <div class="paso-numero">3</div>
+        <h3 class="h6">Fabricación</h3>
+        <p class="small">Producción con los procesos y materiales acordados.</p>
+      </div>
+      <div class="col-md-3 paso-proceso reveal">
+        <div class="paso-numero">4</div>
+        <h3 class="h6">Entrega</h3>
+        <p class="small">Coordinación logística con el cliente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESPALDO CORPORATIVO -->
+<section class="respaldo-corporativo section-padding">
+  <div class="container">
+    <div class="respaldo-corporativo-layout reveal">
+      <div class="respaldo-corporativo-copy">
+        <div class="respaldo-eyebrow"><span></span>Respaldo corporativo</div>
+        <h2>Somos parte<br>de Grupo HBS-Delli</h2>
+        <p>Consorcio mexicano con más de 35 años de experiencia en manufactura, importación, logística y distribución de alimentos y bebidas para la industria turística y de restauración, con presencia en México, Guatemala, República Dominicana, Jamaica y 14 países más en el Caribe, Centro y Sudamérica.</p>
+      </div>
+      <div class="respaldo-corporativo-brands" aria-label="Grupo HBS-Delli y REMSA">
+        <img class="logo-hbs-delli" src="{% static 'img/img-remsa/logo-delli.gif' %}" alt="HBS Group Delli" loading="lazy">
+        <img src="{% static 'img/logo/logo_remsa.png' %}" alt="REMSA Plásticos" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPACIDAD LOGISTICA -->
+<section class="logistica-home section-padding">
+  <div class="container">
+    <div class="logistica-home-layout reveal">
+      <div class="logistica-home-copy">
+        <div class="respaldo-eyebrow"><span></span>Capacidad logística</div>
+        <h2>Entregamos donde<br>se necesite</h2>
+        <p>En REMSA contamos con la capacidad logística y de distribución necesaria para atender los requerimientos de nuestros clientes en gran parte de México y otros mercados internacionales. Coordinamos el suministro y entrega de preformas, botellas y envases de PET grado alimenticio, ofreciendo una atención eficiente y confiable desde nuestras instalaciones hasta el destino de cada pedido.</p>
+      </div>
+      <div class="logistica-home-gallery">
+        <figure class="logistica-home-image logistica-home-image--featured">
+          <img src="{% static 'img/img-remsa/img_logistica_carga.png' %}" alt="Equipo REMSA cargando envases para su distribución" loading="lazy">
+          <figcaption><i class="bi bi-box-seam" aria-hidden="true"></i> Preparación de pedidos</figcaption>
+        </figure>
+        <figure class="logistica-home-image">
+          <img src="{% static 'img/img-remsa/img-transporte1.jpeg' %}" alt="Camión REMSA listo para realizar una entrega" loading="lazy">
+          <figcaption><i class="bi bi-truck" aria-hidden="true"></i> Distribución</figcaption>
+        </figure>
+        <figure class="logistica-home-image">
+          <img src="{% static 'img/img-remsa/img-transporte.jpeg' %}" alt="Envases protegidos y organizados para su transporte" loading="lazy">
+          <figcaption><i class="bi bi-boxes" aria-hidden="true"></i> Carga protegida</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

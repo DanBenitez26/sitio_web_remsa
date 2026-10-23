@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/catalogo.css' %}?v=2">
+{% endblock %}
+{% block content %}
+
+<div class="breadcrumb-remsa">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a href="{% url 'paginas:home' %}">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'catalogo:lista' %}">Categoría de productos</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ producto.nombre }}</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
+<section class="catalogo-page section-padding">
+  <div class="container">
+    <div class="catalogo-detalle">
+      <div class="catalogo-detalle-imagen">
+        {% if producto.imagen_principal %}
+        <img src="{{ producto.imagen_principal.url }}" alt="{{ producto.nombre }}">
+        {% else %}
+        <div class="catalogo-sin-imagen" role="img" aria-label="Imagen no disponible">
+          <i class="bi bi-box-seam" aria-hidden="true"></i>
+          <span>Imagen no disponible</span>
+        </div>
+        {% endif %}
+      </div>
+      <div class="catalogo-detalle-contenido">
+        <span class="section-title-eyebrow">Catálogo REMSA</span>
+        <h1>{{ producto.nombre }}</h1>
+        {% if producto.descripcion_corta %}
+        <p class="catalogo-detalle-descripcion">{{ producto.descripcion_corta }}</p>
+        {% endif %}
+        <dl class="catalogo-modal-datos">
+          {% if producto.capacidad %}<div><dt>Capacidad / medida</dt><dd>{{ producto.capacidad }}</dd></div>{% endif %}
+          {% if producto.color %}<div><dt>Color</dt><dd>{{ producto.color }}</dd></div>{% endif %}
+          {% if producto.tipo %}<div><dt>Tipo</dt><dd>{{ producto.catalogo_tipo }}</dd></div>{% endif %}
+          {% if producto.catalogo_especificaciones %}
+          <div><dt>Especificaciones técnicas</dt><dd>{{ producto.catalogo_especificaciones }}</dd></div>
+          {% endif %}
+        </dl>
+        <div class="catalogo-detalle-acciones">
+          {% if mostrar_ficha_pdf %}
+          <a class="btn btn-navy" href="{% url 'catalogo:ficha_pdf' producto.slug %}">
+            <i class="bi bi-file-earmark-pdf me-2" aria-hidden="true"></i>Descargar ficha PDF
+          </a>
+          {% endif %}
+          <form method="post" action="{% url 'cotizaciones:agregar' producto.pk %}">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{% url 'cotizaciones:carrito' %}">
+            <label class="visually-hidden" for="cantidadProducto">Cantidad para cotizar</label>
+            <input id="cantidadProducto" class="form-control" type="number" name="cantidad"
+              value="1" min="1" aria-label="Cantidad para cotizar">
+            <button class="btn btn-outline-primary" type="submit">
+              <i class="bi bi-file-earmark-plus me-2" aria-hidden="true"></i>Agregar a cotización
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    {% if relacionados %}
+    <section class="catalogo-relacionados">
+      <h2 class="h4">Productos relacionados</h2>
+      <div class="row g-3">
+        {% for relacionado in relacionados %}
+        <div class="col-6 col-md-3">
+          <a class="catalogo-relacionado" href="{{ relacionado.get_absolute_url }}">
+            {% if relacionado.imagen_principal %}
+            <img src="{{ relacionado.imagen_principal.url }}" alt="" loading="lazy">
+            {% else %}
+            <span class="catalogo-relacionado-sin-imagen" aria-hidden="true">
+              <i class="bi bi-box-seam"></i>
+            </span>
+            {% endif %}
+            <span>{{ relacionado.nombre }}</span>
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+    <a class="catalogo-regresar" href="{% url 'catalogo:lista' %}">
+      <i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Volver al catálogo
+    </a>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "{{ producto.nombre|escapejs }}",
+  "description": "{{ producto.descripcion_corta|escapejs }}"
+}
+</script>
+
+{% endblock %}

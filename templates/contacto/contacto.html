@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="breadcrumb-remsa">
+  <div class="container">
+    <nav aria-label="breadcrumb"><ol class="breadcrumb mb-0">
+      <li class="breadcrumb-item"><a href="{% url 'paginas:home' %}">Inicio</a></li>
+      <li class="breadcrumb-item active">Contacto</li>
+    </ol></nav>
+  </div>
+</div>
+<section class="section-padding" style="padding-block: var(--space-lg);">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-5">
+        <h1 class="h3 mb-4">Contáctanos</h1>
+        <ul class="list-unstyled">
+          {% if config_sitio.telefono_principal %}<li class="mb-3"><i class="bi bi-telephone-fill me-2" style="color:var(--color-cyan-500);"></i><a href="tel:{{ config_sitio.telefono_principal }}">{{ config_sitio.telefono_principal }}</a></li>{% endif %}
+          {% if config_sitio.telefono_secundario %}<li class="mb-3"><i class="bi bi-telephone-fill me-2" style="color:var(--color-cyan-500);"></i><a href="tel:{{ config_sitio.telefono_secundario }}">{{ config_sitio.telefono_secundario }}</a></li>{% endif %}
+          {% if config_sitio.correo_comercial %}<li class="mb-3"><i class="bi bi-envelope-fill me-2" style="color:var(--color-cyan-500);"></i><a href="mailto:{{ config_sitio.correo_comercial }}">{{ config_sitio.correo_comercial }}</a></li>{% endif %}
+          {% if config_sitio.direccion %}<li class="mb-3"><i class="bi bi-geo-alt-fill me-2" style="color:var(--color-cyan-500);"></i>{{ config_sitio.direccion|linebreaksbr }}</li>{% endif %}
+          {% if config_sitio.horario_atencion %}<li class="mb-3"><i class="bi bi-clock-fill me-2" style="color:var(--color-cyan-500);"></i>{{ config_sitio.horario_atencion }}</li>{% endif %}
+          {% if config_sitio.whatsapp_numero %}<li class="mb-3"><i class="bi bi-whatsapp me-2" style="color:var(--color-cyan-500);"></i><a href="https://wa.me/{{ config_sitio.whatsapp_numero }}" target="_blank" rel="noopener">Escríbenos por WhatsApp</a></li>{% endif %}
+        </ul>
+
+        {% if config_sitio.mapa_embed_url %}
+        <div class="ratio ratio-4x3 mt-4" style="border-radius: var(--radius-md); overflow:hidden;">
+          <iframe src="{{ config_sitio.mapa_embed_url }}" style="border:0;" allowfullscreen loading="lazy"></iframe>
+        </div>
+        {% else %}
+        <div class="ratio ratio-4x3 mt-4" style="border-radius: var(--radius-md); overflow:hidden;">
+          <iframe src="https://www.google.com/maps?q=21.06992,-89.6358613&amp;z=17&amp;output=embed" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ubicación de Recipientes y Empaques de México"></iframe>
+        </div>
+        <a class="btn btn-outline-primary btn-sm mt-3" href="https://www.google.com/maps/dir/?api=1&amp;destination=21.06992,-89.6358613" target="_blank" rel="noopener"><i class="bi bi-sign-turn-right me-1"></i>Cómo llegar</a>
+        {% endif %}
+      </div>
+
+      <div class="col-lg-7">
+        <div class="p-4" style="background: var(--color-gray-50); border-radius: var(--radius-md);">
+          <h2 class="h5 mb-3">Envíanos un mensaje</h2>
+          <form id="formulario-contacto" method="post" class="needs-validation" novalidate>
+            {% csrf_token %}
+            {{ form.sitio_web }}
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Nombre *</label>
+                {{ form.nombre|add_class:"form-control" }}
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Correo *</label>
+                {{ form.correo|add_class:"form-control" }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Teléfono</label>
+                {{ form.telefono|add_class:"form-control" }}
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Asunto</label>
+                {{ form.asunto|add_class:"form-control" }}
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Mensaje *</label>
+              {{ form.mensaje|add_class:"form-control" }}
+            </div>
+            <button type="submit" class="btn btn-navy btn-lg w-100">Enviar mensaje</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="centroamerica" class="row g-5 mt-4 pt-4 border-top">
+      <div class="col-lg-5">
+        <span class="badge mb-2" style="background:var(--color-cyan-500);">Presencia comercial y operativa</span>
+        <h2 class="h3 mb-3">{{ ca_empresa }}</h2>
+        <p class="mb-3"><i class="bi bi-geo-alt-fill me-2" style="color:var(--color-cyan-500);"></i>{{ ca_direccion }}</p>
+        <div class="ratio ratio-4x3" style="border-radius: var(--radius-md); overflow:hidden;">
+          <iframe src="{{ ca_mapa_embed_url }}" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ubicación de {{ ca_empresa }}"></iframe>
+        </div>
+        <a class="btn btn-outline-primary btn-sm mt-3" href="{{ ca_mapa_url }}" target="_blank" rel="noopener"><i class="bi bi-geo-alt me-1"></i>Abrir en Google Maps</a>
+      </div>
+
+      <div class="col-lg-7">
+        <div class="p-4" style="background: var(--color-gray-50); border-radius: var(--radius-md);">
+          <h3 class="h5 mb-3">Contacta a {{ ca_empresa }}</h3>
+          <div id="ca-alert" class="alert d-none" role="alert" aria-live="polite" tabindex="-1"></div>
+          <form id="ca-form" method="post" action="{% url 'contacto:contacto_centroamerica' %}" novalidate
+                data-recaptcha-enabled="{{ recaptcha_enabled|yesno:'true,false' }}">
+            {% csrf_token %}
+            <div style="position:absolute;left:-9999px;" aria-hidden="true">
+              <label for="ca-sitio-web">Sitio web</label>
+              <input type="text" id="ca-sitio-web" name="sitio_web" tabindex="-1" autocomplete="off">
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label" for="ca-nombre">Nombre completo *</label>
+                <input class="form-control" id="ca-nombre" name="nombre" maxlength="150" minlength="2" autocomplete="name" required>
+                <div class="invalid-feedback"></div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label" for="ca-empresa">Empresa *</label>
+                <input class="form-control" id="ca-empresa" name="empresa" maxlength="150" minlength="2" autocomplete="organization" required>
+                <div class="invalid-feedback"></div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label" for="ca-correo">Correo electrónico *</label>
+                <input class="form-control" type="email" id="ca-correo" name="correo" maxlength="254" autocomplete="email" required>
+                <div class="invalid-feedback"></div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label" for="ca-telefono">Teléfono *</label>
+                <input class="form-control" type="tel" id="ca-telefono" name="telefono" maxlength="30" autocomplete="tel" required>
+                <div class="invalid-feedback"></div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="ca-asunto">Asunto de la consulta *</label>
+              <input class="form-control" id="ca-asunto" name="asunto" maxlength="150" minlength="3" required>
+              <div class="invalid-feedback"></div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="ca-mensaje">Mensaje *</label>
+              <textarea class="form-control" id="ca-mensaje" name="mensaje" rows="5" maxlength="2000" minlength="10" required></textarea>
+              <div class="invalid-feedback"></div>
+            </div>
+            {% if recaptcha_enabled %}
+            <div class="mb-3"><div class="g-recaptcha" data-sitekey="{{ recaptcha_site_key }}"></div></div>
+            {% endif %}
+            <div class="form-check mb-3">
+              <input class="form-check-input" type="checkbox" id="ca-privacidad" name="acepta_privacidad" value="true" required>
+              <label class="form-check-label" for="ca-privacidad">
+                Acepto el <a href="{% url 'paginas:privacidad' %}" target="_blank" rel="noopener">aviso de privacidad</a> *
+              </label>
+              <div class="invalid-feedback"></div>
+            </div>
+            <button type="submit" class="btn btn-navy btn-lg w-100" id="ca-submit">
+              <span class="spinner-border spinner-border-sm me-2 d-none" role="status" aria-hidden="true"></span>
+              <span class="ca-submit-text">Enviar mensaje</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block extra_js %}
+{% load static %}
+{% if recaptcha_enabled %}<script src="https://www.google.com/recaptcha/api.js" async defer></script>{% endif %}
+<script src="{% static 'js/contacto-centroamerica.js' %}?v=1"></script>
+{% endblock %}

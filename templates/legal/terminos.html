@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="section-padding" style="padding-block: var(--space-lg);">
+  <div class="container" style="max-width: 800px;">
+    <h1 class="h3 mb-1">Términos y Condiciones de Uso</h1>
+    <p class="fw-bold mb-1">Recipientes y Empaques de México.</p>
+    <p class="text-muted">Última actualización: 21 de octubre de 2026</p>
+
+    <h2 class="h6 mt-4">1. Aceptación de los términos</h2>
+    <p>Al acceder y utilizar este sitio web, el usuario acepta estos Términos y Condiciones. REMSA podrá actualizarlos cuando sea necesario.</p>
+
+    <h2 class="h6 mt-4">2. Uso del sitio</h2>
+    <p>El sitio tiene como finalidad proporcionar información corporativa sobre Recipientes y Empaques de México, S.A. de C.V. (REMSA Plásticos), sus productos y servicios. Queda prohibido utilizarlo para actividades ilícitas, introducir archivos maliciosos o intentar acceder sin autorización a sus sistemas.</p>
+
+    <h2 class="h6 mt-4">3. Productos y cotizaciones</h2>
+    <p>Las imágenes, descripciones y especificaciones de los productos son informativas y pueden variar. Los precios, disponibilidad, cantidades, condiciones comerciales y tiempos de entrega deberán confirmarse mediante una cotización formal.</p>
+
+    <h2 class="h6 mt-4">4. Propiedad intelectual</h2>
+    <p>Los textos, imágenes, logotipos, marcas y diseños del sitio están protegidos por las leyes aplicables. No podrán reproducirse ni utilizarse sin autorización de sus respectivos titulares. Las marcas REMSA y HBS-DELLI pertenecen a sus respectivos propietarios.</p>
+
+    <h2 class="h6 mt-4">5. Datos del usuario</h2>
+    <p>El usuario es responsable de proporcionar información veraz y actualizada en los formularios de contacto y cotización. Los datos personales serán tratados conforme al <a href="{% url 'paginas:privacidad' %}">Aviso de Privacidad</a> de REMSA y a la legislación aplicable.</p>
+
+    <h2 class="h6 mt-4">6. Disponibilidad y enlaces externos</h2>
+    <p>REMSA procurará mantener el sitio actualizado y disponible, sin garantizar que esté libre de interrupciones o errores. Los enlaces a sitios de terceros son responsabilidad de sus respectivos propietarios.</p>
+
+    <h2 class="h6 mt-4">7. Relación empresarial</h2>
+    <p>REMSA Plásticos mantiene una relación empresarial con HBS-DELLI. Sin embargo, cada empresa conserva sus propias obligaciones y responsabilidades. Cada operación comercial se regirá por la documentación correspondiente.</p>
+
+    <h2 class="h6 mt-4">8. Modificaciones y responsabilidad</h2>
+    <p>REMSA podrá modificar los contenidos, funcionalidades o disponibilidad del sitio. La información publicada no sustituye las condiciones comerciales acordadas formalmente. Estas disposiciones no limitan las responsabilidades que legalmente no puedan excluirse.</p>
+
+    <h2 class="h6 mt-4">9. Contacto y reclamaciones</h2>
+    <p>Para consultas, cotizaciones o reclamaciones, el usuario podrá utilizar los medios de contacto publicados en el sitio web.</p>
+
+    <h2 class="h6 mt-4">10. Legislación aplicable</h2>
+    <p>Estos términos se regirán por las leyes de los Estados Unidos Mexicanos. Las controversias serán atendidas por las autoridades competentes conforme a derecho.</p>
+
+    <p class="mt-4 mb-1"><strong>Empresa:</strong> Recipientes y Empaques de México, S.A. de C.V.</p>
+    <p><strong>Documento relacionado:</strong> <a href="{% url 'paginas:privacidad' %}">Aviso de Privacidad de REMSA Plásticos</a>.</p>
+  </div>
+</section>
+{% endblock %}

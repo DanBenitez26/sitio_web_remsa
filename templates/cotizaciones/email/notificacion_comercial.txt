@@ -1,0 +1,18 @@
+Nueva solicitud de cotización recibida en el sitio web.
+
+Folio: {{ solicitud.folio }}
+Fecha: {{ solicitud.creado_en }}
+
+Cliente: {{ cliente.nombre }}
+Empresa: {{ cliente.empresa|default:"—" }}
+Correo: {{ cliente.correo }}
+Teléfono: {{ cliente.telefono|default:"—" }}
+Ciudad: {{ cliente.ciudad|default:"—" }}
+
+Productos solicitados:
+{% for item in items %}- {{ item.cantidad }} x {{ item.producto.nombre }} ({{ item.producto.get_material_display }}, {{ item.producto.capacidad }})
+{% endfor %}
+Mensaje del cliente:
+{{ solicitud.mensaje|default:"Sin comentarios adicionales." }}
+
+Atender esta solicitud desde el panel de administración.

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /cotizacion/agregar/
+Disallow: /cotizacion/actualizar/
+Disallow: /cotizacion/eliminar/
+
+Sitemap: {{ request.scheme }}://{{ request.get_host }}/sitemap.xml

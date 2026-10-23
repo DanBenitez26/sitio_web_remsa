@@ -1,0 +1,64 @@
+{% load static %}
+<nav class="navbar navbar-expand-xl navbar-remsa sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="{% url 'paginas:home' %}">
+      <img src="{% static 'img/logo/logo_remsa.png' %}" alt="REMSA Plásticos">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarRemsa" aria-controls="navbarRemsa" aria-expanded="false" aria-label="Abrir menú">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarRemsa">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link {% if request.resolver_match.view_name == 'paginas:home' %}active{% endif %}" href="{% url 'paginas:home' %}">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link {% if 'catalogo' in request.resolver_match.namespace and request.resolver_match.url_name == 'lista' %}active{% endif %}" href="{% url 'catalogo:lista' %}">Categoría de productos</a></li>
+        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'servicios' or request.resolver_match.url_name == 'servicio_detalle' %}active{% endif %}" href="{% url 'catalogo:servicios' %}">Soluciones</a></li>
+        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'nosotros' %}active{% endif %}" href="{% url 'paginas:nosotros' %}">Nosotros</a></li>
+        <li class="nav-item"><a class="nav-link {% if request.resolver_match.namespace == 'contacto' %}active{% endif %}" href="{% url 'contacto:contacto' %}">Contacto</a></li>
+      </ul>
+      <div class="d-flex align-items-center gap-2">
+        <button id="buscadorToggle" class="btn btn-link text-navy-900 fs-5" type="button" aria-label="Buscar">
+          <i class="bi bi-search"></i>
+        </button>
+        <div class="dropdown idioma-selector">
+          <button class="btn btn-idioma dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Cambiar idioma" title="Cambiar idioma">
+            <i class="bi bi-globe2" aria-hidden="true"></i>
+            <span data-language-label>ES-MX</span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end idioma-menu">
+            <li><span class="dropdown-header">Selecciona un idioma</span></li>
+            <li>
+              <button type="button" class="dropdown-item idioma-opcion" data-language="es" lang="es-MX">
+                <span class="idioma-menu-code">ES</span>
+                <span>Español <small>(México)</small></span>
+                <i class="bi bi-check2 idioma-check" aria-hidden="true"></i>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item idioma-opcion" data-language="en" lang="en">
+                <span class="idioma-menu-code">EN</span>
+                <span>English</span>
+                <i class="bi bi-check2 idioma-check" aria-hidden="true"></i>
+              </button>
+            </li>
+          </ul>
+        </div>
+        <button type="button" class="btn btn-cotizar position-relative" data-open-chat-modal aria-controls="chatbotPanel">
+          <i class="bi bi-file-earmark-text me-1"></i> Cotizar
+          {% if carrito_total_items > 0 %}
+          <span class="badge rounded-pill bg-danger position-absolute top-0 start-100 translate-middle">{{ carrito_total_items }}</span>
+          {% endif %}
+        </button>
+      </div>
+    </div>
+  </div>
+  <div id="buscadorBox" class="d-none border-top bg-white">
+    <div class="container py-3">
+      <form action="{% url 'catalogo:lista' %}" method="get" class="d-flex gap-2">
+        <input type="search" name="q" class="form-control" placeholder="Buscar productos, materiales, aplicaciones..." value="{{ query|default:'' }}">
+        <button type="submit" class="btn btn-navy"><i class="bi bi-search"></i></button>
+      </form>
+    </div>
+  </div>
+</nav>
+<div id="google_translate_element" class="google-translate-hidden" aria-hidden="true"></div>
+<div id="languageStatus" class="visually-hidden" role="status" aria-live="polite"></div>

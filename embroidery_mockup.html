@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RÉMSA - Logo estampado</title>
+    <style>
+      :root {
+        --navy: #0d2449;
+        --navy-2: #091d3b;
+        --shirt-light: #0f2d5c;
+        --shirt-dark: #081a33;
+        --white: #edf3ff;
+        --gold: #dce8ff;
+      }
+
+      * { box-sizing: border-box; }
+
+      html, body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #dfe7f0;
+      }
+
+      .stage {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        background: #ccd9ea;
+      }
+
+      .photo {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: saturate(0.95) contrast(1.08) brightness(1.02);
+      }
+
+      .solutions-section {
+        display: flex;
+        width: 100vw;
+        min-height: 100vh;
+        background: linear-gradient(90deg, #062a48 0%, #0a355e 52%, #0c3f73 100%);
+      }
+
+      .solutions-copy {
+        flex: 0 0 48%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 4.5rem 4rem 4.5rem 5rem;
+        color: #ffffff;
+      }
+
+      .eyebrow {
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+        color: rgba(255,255,255,0.85);
+      }
+
+      .solutions-copy h1 {
+        margin: 0;
+        font-size: clamp(2.8rem, 4vw, 5vw);
+        line-height: 0.95;
+        letter-spacing: -0.06em;
+        color: #f3f8ff;
+        font-weight: 800;
+      }
+
+      .solutions-copy p {
+        margin-top: 2rem;
+        max-width: 580px;
+        font-size: 1.1rem;
+        line-height: 1.7;
+        color: rgba(230, 239, 255, 0.94);
+      }
+
+      .cta-row {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .cta-row button {
+        border: none;
+        border-radius: 0.9rem;
+        background: #f3f7ff;
+        color: #0b2346;
+        font-weight: 700;
+        font-size: 1.1rem;
+        padding: 1.05rem 1.6rem;
+        cursor: pointer;
+        box-shadow: 0 10px 26px rgba(2, 14, 28, 0.12);
+      }
+
+      .cta-row .secondary {
+        background: transparent;
+        color: #eef7ff;
+        border: 2px solid rgba(255,255,255,0.25);
+        box-shadow: none;
+      }
+
+      .mini-note {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.7rem;
+        margin-top: 2rem;
+        font-size: 1.02rem;
+        color: rgba(236, 244, 255, 0.92);
+      }
+
+      .check {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.3rem;
+        height: 1.3rem;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.12);
+        border: 1px solid rgba(255,255,255,0.18);
+      }
+
+      .solutions-visual {
+        position: relative;
+        flex: 1;
+        min-height: 100vh;
+        overflow: hidden;
+        background: rgba(255,255,255,0.02);
+      }
+
+      .solutions-visual .photo {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: saturate(0.95) contrast(1.06) brightness(1.02);
+      }
+
+      .quality-badge {
+        position: absolute;
+        left: 32%;
+        bottom: 2.3rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.7rem;
+        padding: 0.9rem 1.2rem;
+        border-radius: 0.9rem;
+        background: rgba(7, 19, 33, 0.5);
+        border: 1px solid rgba(221, 234, 255, 0.2);
+        color: white;
+        font-weight: 600;
+        backdrop-filter: blur(2px);
+      }
+
+      .badge-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.1);
+      }
+
+      .chat-badge {
+        position: absolute;
+        right: 1.3rem;
+        bottom: 1.2rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 0.7rem 1.1rem;
+        border-radius: 0.9rem;
+        background: linear-gradient(180deg, #0b3a68 0%, #0f517f 100%);
+        border: 1px solid rgba(255,255,255,0.18);
+        color: white;
+        font-weight: 700;
+        box-shadow: 0 10px 20px rgba(6, 34, 58, 0.28);
+      }
+
+      .chat-icon {
+        font-size: 1.2rem;
+      }
+
+      @media (max-width: 975px) {
+        .solutions-section {
+          flex-direction: column;
+        }
+
+        .solutions-copy {
+          flex: none;
+          padding: 2.5rem 1.5rem 1.5rem;
+        }
+
+        .solutions-visual {
+          min-height: 54vh;
+        }
+
+        .shirt-print {
+          width: min(640px, 88vw);
+          min-width: 300px;
+          left: 50%;
+          top: 54%;
+        }
+
+        .quality-badge {
+          left: 1rem;
+          right: 1rem;
+          bottom: 1rem;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+    <body>
+      <div class="solutions-section">
+        <div class="solutions-copy">
+          <div class="eyebrow">SOLUCIONES REMSA</div>
+          <h1>Soluciones que hacen<br>destacar tu envase.</h1>
+          <p>
+            Personalización, pigmentado y opciones de acabado para dar forma a envases alineados con tu producto y tu marca.
+          </p>
+
+          <div class="cta-row">
+            <button>Explorar soluciones ↓</button>
+            <button class="secondary">Hablar con un asesor ↗</button>
+          </div>
+
+          <div class="mini-note">
+            <span class="check">✓</span>
+            <span>Opciones sujetas a factibilidad técnica</span>
+          </div>
+        </div>
+
+        <div class="solutions-visual">
+          <img class="photo" src="file:///c:/Users/DBENITEZ/AppData/Roaming/Code/agentSessionData/6e046e0f-2e0f-4150-b60a-fd33857e592a/attachments/2bd092a6-322f-41e3-a748-e852e783a935/img_soluciones.png" alt="Trabajador de la fábrica RÉMSA" />
+
+          <div class="quality-badge">
+            <span class="badge-icon">◌</span>
+            <span>Calidad y atención en cada etapa</span>
+          </div>
+
+          <div class="chat-badge">
+            <span class="chat-icon">💬</span>
+            <span>Chat REMSA</span>
+          </div>
+        </div>
+      </div>
+    </body>
+  </html>

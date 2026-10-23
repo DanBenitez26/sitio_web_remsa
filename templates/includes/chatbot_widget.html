@@ -1,0 +1,94 @@
+<div class="chatbot-widget" id="chatbotWidget">
+  <button class="chatbot-toggle" type="button" id="chatbotToggle" aria-expanded="false" aria-controls="chatbotPanel" aria-label="Abrir chat con REMSA Plásticos">
+    <i class="bi bi-chat-dots-fill" aria-hidden="true"></i>
+    <span>Chat REMSA</span>
+  </button>
+
+  <section class="chatbot-panel" id="chatbotPanel"
+           data-endpoint="{% url 'chatbot_response' %}"
+           data-lead-endpoint="{% url 'contacto:chatbot_lead' %}"
+           data-catalogue-url="{% url 'catalogo:lista' %}"
+           role="dialog" aria-label="Asistente comercial de REMSA" aria-modal="false" hidden>
+    <header class="chatbot-header">
+      <div class="chatbot-title-wrap">
+        <div class="chatbot-avatar"><i class="bi bi-chat-dots-fill" aria-hidden="true"></i></div>
+        <div>
+          <strong>REMSA Plásticos</strong>
+          <small><span class="chatbot-status-dot" aria-hidden="true"></span>Atención comercial</small>
+        </div>
+      </div>
+      <button type="button" class="chatbot-close" id="chatbotClose" aria-label="Minimizar chat">
+        <i class="bi bi-dash-lg" aria-hidden="true"></i>
+      </button>
+    </header>
+
+    <div class="chatbot-body" id="chatbotBody" aria-live="polite" aria-relevant="additions text">
+      <div class="message bot">
+        ¡Hola! 👋 Bienvenido a REMSA Plásticos. ¿En qué podemos ayudarte?
+      </div>
+      <div class="chatbot-quick-replies" id="chatbotQuickReplies" aria-label="Respuestas rápidas">
+        <button type="button" data-message="Quiero información">Quiero información</button>
+        <button type="button" data-message="Quiero una cotización">Quiero una cotización</button>
+        <button type="button" data-message="Ver productos">Ver productos</button>
+        <button type="button" data-message="Hablar con un asesor">Hablar con un asesor</button>
+      </div>
+      <div class="chatbot-form-status" id="chatbotFormStatus" role="status" aria-live="polite" hidden></div>
+
+      <form class="chatbot-lead-form" id="chatbotLeadForm" method="post"
+            action="{% url 'contacto:chatbot_lead' %}" hidden>
+        {% csrf_token %}
+        <input type="hidden" name="submission_id" id="chatbotSubmissionId">
+        <div class="chatbot-field chatbot-trap" aria-hidden="true">
+          <label for="chatbotWebsite">Deja este campo vacío</label>
+          <input id="chatbotWebsite" name="sitio_web" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <div class="chatbot-field">
+          <label for="chatbotName">Nombre completo <span>*</span></label>
+          <input id="chatbotName" name="nombre" type="text" maxlength="150" minlength="2"
+                 autocomplete="name" required>
+        </div>
+        <div class="chatbot-field">
+          <label for="chatbotCompany">Empresa <span>*</span></label>
+          <input id="chatbotCompany" name="empresa" type="text" maxlength="150" minlength="2"
+                 autocomplete="organization" required>
+        </div>
+        <div class="chatbot-field">
+          <label for="chatbotPhone">Teléfono o WhatsApp <span>*</span></label>
+          <input id="chatbotPhone" name="telefono" type="tel" maxlength="30"
+                 autocomplete="tel" inputmode="tel" required>
+        </div>
+        <div class="chatbot-field">
+          <label for="chatbotEmail">Correo electrónico <span>*</span></label>
+          <input id="chatbotEmail" name="correo" type="email" maxlength="254"
+                 autocomplete="email" required>
+        </div>
+        <div class="chatbot-field">
+          <label for="chatbotProduct">Producto de interés <small>(opcional)</small></label>
+          <input id="chatbotProduct" name="producto" type="text" maxlength="150">
+        </div>
+        <div class="chatbot-field">
+          <label for="chatbotMessage">¿Cómo podemos ayudarte? <small>(opcional)</small></label>
+          <textarea id="chatbotMessage" name="mensaje" rows="3" maxlength="2000"></textarea>
+        </div>
+        <button class="chatbot-lead-submit" id="chatbotLeadSubmit" type="submit">
+          <i class="bi bi-send-fill" aria-hidden="true"></i> Solicitar contacto
+        </button>
+      </form>
+
+      <div class="chatbot-success-actions" id="chatbotSuccessActions" hidden>
+        <button type="button" id="chatbotNewInquiry">Iniciar otra consulta</button>
+        <button type="button" id="chatbotSuccessClose">Cerrar chat</button>
+      </div>
+    </div>
+
+    <form class="chatbot-form" id="chatbotForm" method="post">
+      {% csrf_token %}
+      <label class="visually-hidden" for="chatbotInput">Escribe tu mensaje</label>
+      <input id="chatbotInput" name="message" type="text" maxlength="500"
+             placeholder="Escribe tu mensaje..." autocomplete="off">
+      <button type="submit" aria-label="Enviar mensaje">
+        <i class="bi bi-send-fill" aria-hidden="true"></i>
+      </button>
+    </form>
+  </section>
+</div>

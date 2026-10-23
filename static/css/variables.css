@@ -1,0 +1,40 @@
+:root {
+  /* Paleta REMSA */
+  --color-brand: #003E8F;
+  --color-blue:#BDF5FF;
+  --color-navy-950: #062746;
+  --color-navy-900: #0A2540;
+  --color-navy-800: #003E8F;
+  --color-cyan-500: #003E8F;
+  --color-cyan-600: #002F6C;
+  --color-white: #FFFFFF;
+  --color-gray-50: #F4F7FA;
+  --color-gray-200: #E3E9F0;
+  --color-text: #172B4D;
+  --color-text-muted: #5B6B85;
+  --color-success: #1E9E6B;
+  --color-danger: #D64545;
+
+  /* Tipografia */
+  --font-heading: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Inter', 'Segoe UI', system-ui, sans-serif;
+
+  /* Espaciado */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+
+  /* Radios y sombras */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --shadow-sm: 0 2px 8px rgba(6, 39, 70, 0.08);
+  --shadow-md: 0 8px 24px rgba(6, 39, 70, 0.12);
+  --shadow-lg: 0 20px 48px rgba(6, 39, 70, 0.18);
+
+  /* Transiciones */
+  --transition-base: all 0.25s ease;
+}

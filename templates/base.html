@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es-mx">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{{ meta_title|default:"REMSA Plásticos | Envases y empaques de plástico" }}{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}{{ meta_description|default:'REMSA Plásticos fabrica envases y empaques de PET, PEAD / HDPE y PP en México.' }}{% endblock %}">
+  <link rel="canonical" href="{{ request.build_absolute_uri }}">
+
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="REMSA Plásticos">
+  <meta property="og:title" content="{% block og_title %}{{ meta_title|default:'REMSA Plásticos' }}{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}{{ meta_description|default:'Fabricante de envases y empaques de plástico en México.' }}{% endblock %}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ request.build_absolute_uri }}">
+  {% block og_image %}{% endblock %}
+
+  <link rel="icon" href="{% static 'img/logo/logo_remsa.png' %}" type="image/png">
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+
+  <link rel="stylesheet" href="{% static 'css/variables.css' %}">
+  <link rel="stylesheet" href="{% static 'css/base.css' %}?v=56">
+  {% block extra_css %}{% endblock %}
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "{{ config_sitio.nombre_empresa }}",
+    "url": "{{ request.scheme }}://{{ request.get_host }}",
+    "foundingDate": "{{ config_sitio.anio_fundacion }}"
+    {% if config_sitio.telefono_principal %},"telephone": "{{ config_sitio.telefono_principal }}"{% endif %}
+    {% if config_sitio.correo_comercial %},"email": "{{ config_sitio.correo_comercial }}"{% endif %}
+  }
+  </script>
+  {% block structured_data %}{% endblock %}
+</head>
+<body>
+  <div id="pageSplash" class="page-splash" aria-hidden="true">
+    <div class="page-splash-content">
+      <img src="{% static 'img/logo/logo_remsa.png' %}" alt="">
+      <span class="page-splash-tagline">Recipientes y Empaques de México</span>
+      <span class="page-splash-loader"></span>
+    </div>
+  </div>
+  {% include "includes/topbar.html" %}
+  {% include "includes/navbar.html" %}
+  {% include "includes/messages.html" %}
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  {% include "includes/footer.html" %}
+  {% if show_whatsapp_float %}
+    {% include "includes/whatsapp_button.html" %}
+  {% endif %}
+  {% include "includes/chatbot_widget.html" %}
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static 'js/navbar.js' %}"></script>
+  <script src="{% static 'js/scroll-animations.js' %}"></script>
+  <script src="{% static 'js/forms-validation.js' %}"></script>
+  <script src="{% static 'js/chatbot.js' %}?v=4"></script>
+  <script src="{% static 'js/page-splash.js' %}"></script>
+  <script src="{% static 'js/language.js' %}?v=3"></script>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>
