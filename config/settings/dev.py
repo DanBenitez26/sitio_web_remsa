@@ -10,12 +10,34 @@ DEBUG = True
 
 ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['127.0.0.1', 'localhost'])
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if env('DB_ENGINE', default='sqlite').lower() == 'postgresql':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': env('PGDATABASE', default='remsa_db'),
+            'USER': env('PGUSER', default='postgres'),
+            'PASSWORD': env('PGPASSWORD', default='root'),
+            'HOST': env('PGHOST', default='127.0.0.1'),
+            'PORT': env('PGPORT', default='5432'),
+        }
     }
-}
+else:
+    DATABASES = { 
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+
+
+
+#DATABASES = {
+#    'default': {
+#       'ENGINE': 'django.db.backends.sqlite3',
+#
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#  }
+#}
 
 # En desarrollo es útil ver los correos en consola aunque el .env no lo especifique
 EMAIL_BACKEND = env('EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
