@@ -95,15 +95,39 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# === Correo (compartido; los valores vienen del .env) ===
-EMAIL_BACKEND = env('EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
-EMAIL_HOST = env('EMAIL_HOST', default='')
+
+
+# === Correo ===
+EMAIL_BACKEND = env(
+    'EMAIL_BACKEND',
+    default='django.core.mail.backends.smtp.EmailBackend'
+)
+EMAIL_HOST = env('EMAIL_HOST', default='smtp.gmail.com')
 EMAIL_PORT = env.int('EMAIL_PORT', default=587)
 EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', default=True)
 EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
-DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='REMSA Plásticos <no-reply@remsaplasticos.com>')
-COMERCIAL_EMAIL = env('COMERCIAL_EMAIL', default='comercial@remsaplasticos.com')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='kxsnkkrobupljxep')
+DEFAULT_FROM_EMAIL = env(
+    'DEFAULT_FROM_EMAIL',
+    default='REMSA Plásticos <danbenitez448@gmail.com>'
+)
+COMERCIAL_EMAIL = env(
+    'COMERCIAL_EMAIL',
+    default='danbenitez448@gmail.com'
+)
+
+
+# === Correo (compartido; los valores vienen del .env) ===
+#EMAIL_BACKEND = env('EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
+#EMAIL_HOST = env('EMAIL_HOST', default='smtp.gmail.com')
+#EMAIL_PORT = env.int('EMAIL_PORT', default=587)
+#EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', default=True)
+#EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='')
+#EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
+#DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='REMSA Plásticos <danbenitez448@gmail.com>')
+#COMERCIAL_EMAIL = env('COMERCIAL_EMAIL', default='danbenitez448@gmail.com')
+
+
 RECAPTCHA_SITE_KEY = env('RECAPTCHA_SITE_KEY', default='')
 RECAPTCHA_SECRET_KEY = env('RECAPTCHA_SECRET_KEY', default='')
 
