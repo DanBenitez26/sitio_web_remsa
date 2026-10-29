@@ -23,7 +23,7 @@ from .models import Producto, Servicio
 CATEGORY_DISPLAY = {
     'Garrafones': (
         ('img/img-remsa/envase-garrafon-azul-generico.png',),
-        'Garrafones y Botellones',
+        'Garrafones',
     ),
     'Botellas': (
         ('img/img-remsa/img-catalogo/botellas_pet.png',),
@@ -49,7 +49,7 @@ CATALOGO_DIGITAL_URL = 'https://xac.lat/'
 
 
 CATEGORY_DESCRIPTIONS = {
-    'Garrafones': 'Garrafones y botellones para agua y otras soluciones de envasado.',
+    'Garrafones': 'Garrafones para agua y otras soluciones de envasado.',
     'Botellas': 'Botellas PET para productos con una presentación confiable.',
     'Asas': 'Asas para envases y garrafas, pensadas para un manejo práctico.',
     'Tapas': 'Tapas y componentes para completar tus soluciones de empaque.',
