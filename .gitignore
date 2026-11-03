@@ -21,3 +21,8 @@ logs/*.log
 # Editor y sistema
 .vscode/
 .DS_Store
+
+# Respaldos locales
+backups/
+*.sql
+*.backup
